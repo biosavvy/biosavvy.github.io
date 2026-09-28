@@ -805,24 +805,6 @@
   .product-card.product-10 .card-header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   }
-  .products-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .products-grid > .product-card { margin-bottom: 0; }
-  .products-grid > .product-card:nth-child(odd):last-child {
-    grid-column: 1 / -1;
-    max-width: calc(50% - 12px);
-    justify-self: center;
-  }
-  .products-grid .card-product-image { max-width: 220px; }
-  .products-grid .card-header { padding: 18px 20px; }
-  .products-grid .card-header h2 { font-size: 1.15rem; }
-  .products-grid .card-price { font-size: 1.45rem; }
-  .products-grid .card-body { padding: 8px 20px 20px; }
-  .products-grid .card-description { font-size: 0.9rem; }
-  .products-grid .specs-grid { gap: 8px; }
 
   .product-quick-nav {
     background: var(--white);
@@ -983,12 +965,6 @@
   }
 
   @media (max-width: 768px) {
-    .products-grid {
-      grid-template-columns: 1fr;
-    }
-    .products-grid > .product-card:nth-child(odd):last-child {
-      max-width: 100%;
-    }
     .pq-nav-item { min-width: 130px; }
     .trust-strip { flex-direction: column; gap: 12px; }
     .tips-grid { grid-template-columns: 1fr; }
@@ -1213,10 +1189,9 @@
 <!-- ============ PRODUCT CARDS ============ -->
 <section class="products-section">
   <div class="container">
-  <div class="products-grid">
 
     <!-- ===== PRODUCT 1 — TPE FOLDABLE YOGA MAT 183CM (BLUE) — BEST SELLER ===== -->
-    <article class="product-card product-1" id="product-1">
+    <article class="product-card product-1">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E3;</span>
@@ -1297,7 +1272,7 @@
     </article>
 
     <!-- ===== PRODUCT 2 — 10MM EXTRA THICK YOGA MAT (PURPLE) — BEST COMFORT ===== -->
-    <article class="product-card product-2" id="product-2">
+    <article class="product-card product-2">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F535;</span>
@@ -1378,7 +1353,7 @@
     </article>
 
     <!-- ===== PRODUCT 3 — MULTI-THICKNESS YOGA MAT (TEAL) — BUDGET PICK ===== -->
-    <article class="product-card product-3" id="product-3">
+    <article class="product-card product-3">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E2;</span>
@@ -1459,7 +1434,7 @@
     </article>
 
     <!-- ===== PRODUCT 4 — EVA FOAM YOGA MAT 4MM (ORANGE) — BEST VALUE ===== -->
-    <article class="product-card product-4" id="product-4">
+    <article class="product-card product-4">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E0;</span>
@@ -1539,7 +1514,7 @@
     </article>
 
     <!-- ===== PRODUCT 5 — EVA ANTI-SLIP FITNESS MAT (YELLOW) — BEST GRIP ===== -->
-    <article class="product-card product-5" id="product-5">
+    <article class="product-card product-5">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E1;</span>
@@ -1618,9 +1593,8 @@
       </div>
     </article>
 
-    </div> <!-- /.products-grid -->
-
- </div>
+  
+</div>
 </section>
 
 <!-- ============ SCIENCE / INFO BOX ============ -->

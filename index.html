@@ -185,57 +185,121 @@
 
     .reviews .blog-section { max-width: 1040px; margin: 0 auto; }
 
+
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      max-width: 980px;
+      margin: 0 auto;
     }
 
     .blog-card {
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
     }
-    .blog-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .blog-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
 
-    .blog-card .thumbnail {
-      height: 176px;
+    .blog-card .thumb {
+      width: 90px;
+      min-height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 54px;
+      font-size: 34px;
+      flex-shrink: 0;
       position: relative;
     }
-    .blog-card .thumbnail .thumb-label {
-      position: absolute;
-      bottom: 10px;
-      right: 12px;
-      background: rgba(0,0,0,0.38);
-      color: #fff;
-      font-size: 10.5px;
+
+    .blog-card .card-body {
+      padding: 14px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .blog-card h3 {
+      font-size: 13.5px;
       font-weight: 700;
-      padding: 3px 9px;
+      line-height: 1.35;
+      margin-bottom: 4px;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card .excerpt {
+      font-size: 11.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+      margin-bottom: 8px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .blog-card .card-meta {
+      font-size: 10.5px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .blog-card .product-count {
+      font-size: 10px;
+      color: var(--primary);
+      font-weight: 700;
+      background: var(--primary-light);
+      padding: 2px 7px;
       border-radius: 4px;
-      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .blog-card .read-link {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      margin-left: auto;
     }
 
-    .blog-card .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-    .blog-card .card-meta {
-      font-size: 12px; color: var(--text-light); margin-bottom: 9px;
-      display: flex; gap: 14px; flex-wrap: wrap;
+    .blog-card.card-hidden { display: none !important; }
+    .blog-card.blog-card-scheduled { display: none !important; }
+    .blog-card.blog-card-scheduled.is-visible { display: flex !important; }
+
+    @media (max-width: 720px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .blog-card .thumb {
+        width: 72px;
+        min-height: 100px;
+        font-size: 28px;
+      }
+      .blog-card .card-body { padding: 12px; }
+      .blog-card h3 { font-size: 13px; }
     }
-    .blog-card h3 { font-size: 17px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; color: var(--text); }
-    .blog-card .excerpt { font-size: 14px; color: var(--text-light); line-height: 1.55; margin-bottom: 16px; flex: 1; }
-    .blog-card .read-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      color: var(--primary); font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: gap 0.2s;
-    }
-    .blog-card .read-link:hover { gap: 9px; }
 
     /* ---------- Process ---------- */
     .process { padding: 64px 20px; }
@@ -422,233 +486,234 @@
 
       <div class="blog-grid">
 
-        <!-- Scheduled: Oral Irrigators (Sep 29) -->
         <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-29">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);">
+          <a href="article16.html" class="thumb" style="background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);" aria-label="Read Best Oral Irrigators in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F4A7;
-            <span class="thumb-label">ORAL CARE</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 29, 2026</span><span>&#x23F1; 9 min read</span></div>
             <h3>Best Oral Irrigators in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Oral irrigators are clinically proven to reduce plaque and improve gum health. We reviewed the top water flossers of 2026 for pressure performance, tank capacity, and portability.</p>
-            <a href="article16.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 29, 2026 &middot; &#x23F1; 9 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">ORAL CARE &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Scheduled: Infrared Therapy Mattresses (Sep 30) -->
         <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #991B1B 0%, #DC2626 100%);">
+          <a href="article17.html" class="thumb" style="background: linear-gradient(135deg, #991B1B 0%, #DC2626 100%);" aria-label="Read Best Infrared Therapy Mattresses in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F534;
-            <span class="thumb-label">WELLNESS</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 30, 2026</span><span>&#x23F1; 10 min read</span></div>
             <h3>Best Infrared Therapy Mattresses in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Infrared therapy mattresses combine far infrared heat, PEMF, and crystal stones for whole-body wellness. We evaluated the top models for EMF safety, heating uniformity, and therapeutic value.</p>
-            <a href="article17.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 30, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">WELLNESS &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Pure Titanium Thermos -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #6366F1 0%, #A78BFA 100%);">
+          <a href="article11.html" class="thumb" style="background: linear-gradient(135deg, #6366F1 0%, #A78BFA 100%);" aria-label="Read Best Pure Titanium Thermos Cups in 2026: Tested &amp; Ranked">
             &#x1F964;
-            <span class="thumb-label">PREMIUM PICKS</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 25, 2026</span><span>&#x23F1; 9 min read</span></div>
             <h3>Best Pure Titanium Thermos Cups in 2026: Tested &amp; Ranked</h3>
             <p class="excerpt">Titanium thermos cups offer superior heat retention, lightweight portability, and non-reactive safety. We tested the top titanium bottles of 2026 for insulation performance and build quality.</p>
-            <a href="article11.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 25, 2026 &middot; &#x23F1; 9 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">PREMIUM PICKS &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Neck & Shoulder Massagers -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);">
+          <a href="article10.html" class="thumb" style="background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);" aria-label="Read Best Neck &amp; Shoulder Massagers in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F486;
-            <span class="thumb-label">WELLNESS PICKS</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 25, 2026</span><span>&#x23F1; 10 min read</span></div>
             <h3>Best Neck &amp; Shoulder Massagers in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Chronic neck and shoulder tension affects millions. We evaluated the top massagers of 2026 &mdash; from Shiatsu pillows to percussive devices &mdash; to find the most effective relief solutions.</p>
-            <a href="article10.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 25, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">WELLNESS PICKS &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Herbal Foot Bath -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #65A30D 0%, #A3E635 100%);">
+          <a href="article9.html" class="thumb" style="background: linear-gradient(135deg, #65A30D 0%, #A3E635 100%);" aria-label="Read Best Herbal Foot Bath Products in 2026: Tested &amp; Ranked">
             &#x1F33F;
-            <span class="thumb-label">NATURAL CARE</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 22, 2026</span><span>&#x23F1; 8 min read</span></div>
             <h3>Best Herbal Foot Bath Products in 2026: Tested &amp; Ranked</h3>
             <p class="excerpt">Traditional herbal foot baths promote circulation and relaxation through natural ingredients. We reviewed the top products of 2026 for ingredient quality, efficacy, and overall user experience.</p>
-            <a href="article9.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 22, 2026 &middot; &#x23F1; 8 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">NATURAL CARE &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Smart Watches -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);">
+          <a href="article8.html" class="thumb" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);" aria-label="Read Best Budget Smart Watches in 2026: Expert Reviews &amp; Buying Guide">
             &#x231A;
-            <span class="thumb-label">TECH REVIEW</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 22, 2026</span><span>&#x23F1; 10 min read</span></div>
             <h3>Best Budget Smart Watches in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">You don&rsquo;t need to spend a fortune for a capable smartwatch. We tested the best affordable smartwatches of 2026 for health tracking accuracy, battery life, and everyday usability.</p>
-            <a href="article8.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 22, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">TECH REVIEW &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Smart Posture Correctors -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);">
+          <a href="article15.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);" aria-label="Read Best Smart Posture Correctors in 2026: Tested &amp; Ranked">
             &#x1F9CD;
-            <span class="thumb-label">OFFICE HEALTH</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 22, 2026</span><span>&#x23F1; 8 min read</span></div>
             <h3>Best Smart Posture Correctors in 2026: Tested &amp; Ranked</h3>
             <p class="excerpt">Smart posture correctors use vibration feedback to train better posture habits. We tested the top devices of 2026 for sensor accuracy, all-day comfort, and companion app functionality.</p>
-            <a href="article15.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 22, 2026 &middot; &#x23F1; 8 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">OFFICE HEALTH &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Electric Mixing Cups -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);">
+          <a href="article7.html" class="thumb" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);" aria-label="Read Best Electric Mixing Cups &amp; Shakers in 2026: Tested &amp; Ranked">
             &#x1F964;
-            <span class="thumb-label">FITNESS GEAR</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 18, 2026</span><span>&#x23F1; 8 min read</span></div>
             <h3>Best Electric Mixing Cups &amp; Shakers in 2026: Tested &amp; Ranked</h3>
             <p class="excerpt">Electric mixing cups deliver consistent, clump-free shakes and protein blends at the touch of a button. We ranked the top models of 2026 by motor power, capacity, and ease of cleaning.</p>
-            <a href="article7.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 18, 2026 &middot; &#x23F1; 8 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">FITNESS GEAR &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Electric Foot Bath -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);">
+          <a href="article6.html" class="thumb" style="background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);" aria-label="Read Best Electric Foot Bath Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F6C1;
-            <span class="thumb-label">RELAXATION</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 18, 2026</span><span>&#x23F1; 9 min read</span></div>
             <h3>Best Electric Foot Bath Devices in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Electric foot baths combine heat therapy, bubble massage, and acupressure for relaxation at home. We reviewed the top models of 2026 for features, safety, and long-term reliability.</p>
-            <a href="article6.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 18, 2026 &middot; &#x23F1; 9 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">RELAXATION &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Infrared Sauna Blankets -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);">
+          <a href="article14.html" class="thumb" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);" aria-label="Read Best Infrared Sauna Blankets in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F9D6;
-            <span class="thumb-label">WELLNESS</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 18, 2026</span><span>&#x23F1; 10 min read</span></div>
             <h3>Best Infrared Sauna Blankets in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Infrared sauna blankets bring detoxification and deep relaxation into your home. We reviewed the top models of 2026 for heating performance, material safety, and overall build quality.</p>
-            <a href="article14.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 18, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">WELLNESS &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Yoga Mats -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);">
-            🧘
-            <span class="thumb-label">MATERIAL GUIDE</span>
-          </div>
+          <a href="article4.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);" aria-label="Read Best Yoga Mats in 2026: Expert Reviews &amp; Buying Guide">
+            &#x1F9D8;
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>📅 Sep 15, 2026</span><span>⏱ 10 min read</span></div>
-            <h3>Best Yoga Mats in 2026: TPE, Rubber, Cork &amp; More — Which Is Right for You?</h3>
-            <p class="excerpt">From $3 budget mats to premium natural rubber and eco cork blends — compared by material, grip, thickness and value.</p>
-            <a href="article4.html" class="read-link">Read Review →</a>
+            <h3>Best Yoga Mats in 2026: Expert Reviews &amp; Buying Guide</h3>
+            <p class="excerpt">From TPE and PVC to premium natural rubber and eco cork blends &mdash; compared by material, grip, thickness and value for every yoga practice.</p>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 15, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">MATERIAL GUIDE &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Eye Massagers -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);">
+          <a href="article13.html" class="thumb" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);" aria-label="Read Best Eye Massagers in 2026: Tested &amp; Ranked">
             &#x1F441;&#xFE0F;
-            <span class="thumb-label">EYE CARE</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 15, 2026</span><span>&#x23F1; 8 min read</span></div>
             <h3>Best Eye Massagers in 2026: Tested &amp; Ranked</h3>
             <p class="excerpt">Digital eye strain is ubiquitous. We tested the leading eye massagers of 2026 for heat therapy quality, massage effectiveness, and comfort &mdash; helping you find real relief from screen fatigue.</p>
-            <a href="article13.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 15, 2026 &middot; &#x23F1; 8 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">EYE CARE &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Resistance Bands -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #9333EA 0%, #EC4899 100%);">
-            🏋️
-            <span class="thumb-label">COMPLETE GUIDE</span>
-          </div>
+          <a href="article3.html" class="thumb" style="background: linear-gradient(135deg, #9333EA 0%, #EC4899 100%);" aria-label="Read Best Resistance Bands in 2026: Expert Reviews &amp; Buying Guide">
+            &#x1F4AA;
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>📅 Sep 11, 2026</span><span>⏱ 10 min read</span></div>
-            <h3>Best Resistance Bands in 2026: A Complete Buyer's Guide</h3>
-            <p class="excerpt">Latex tubes, fabric loops or full 11-piece sets? We compare 5 top-rated band sets for home workouts, glute training and beginners.</p>
-            <a href="article3.html" class="read-link">Read Review →</a>
+            <h3>Best Resistance Bands in 2026: Expert Reviews &amp; Buying Guide</h3>
+            <p class="excerpt">Latex tubes, fabric loops or full 11-piece sets? We compare 5 top-rated band sets for home workouts, glute training, physical therapy and beginners.</p>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 11, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">COMPLETE GUIDE &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Red Light Therapy -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #DC2626 0%, #F472B6 100%);">
+          <a href="article12.html" class="thumb" style="background: linear-gradient(135deg, #DC2626 0%, #F472B6 100%);" aria-label="Read Best Red Light Therapy Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F534;
-            <span class="thumb-label">RECOVERY</span>
-          </div>
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>&#x1F4C5; Sep 11, 2026</span><span>&#x23F1; 9 min read</span></div>
             <h3>Best Red Light Therapy Devices in 2026: Expert Reviews &amp; Buying Guide</h3>
             <p class="excerpt">Red light therapy supports skin health, pain relief, and cellular recovery. We reviewed the top at-home devices of 2026 for wavelength accuracy, irradiance, and treatment coverage.</p>
-            <a href="article12.html" class="read-link">Read Review &rarr;</a>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 11, 2026 &middot; &#x23F1; 9 min</span>
+              <span class="product-count">4 Products</span>
+              <span class="read-link">RECOVERY &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Body Scales -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);">
-            ⚖️
-            <span class="thumb-label">COMPARISON</span>
-          </div>
+          <a href="article2.html" class="thumb" style="background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);" aria-label="Read Best Smart Body Scales in 2026: Tested &amp; Ranked">
+            &#x2696;&#xFE0F;
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>📅 Sep 11, 2026</span><span>⏱ 10 min read</span></div>
-            <h3>Best Smart Body Scales in 2026: Which One Is Actually Accurate?</h3>
-            <p class="excerpt">From $7 basic scales to Bluetooth smart trackers — we break down BIA technology, accuracy, app features and real value.</p>
-            <a href="article2.html" class="read-link">Read Review →</a>
+            <h3>Best Smart Body Scales in 2026: Tested &amp; Ranked</h3>
+            <p class="excerpt">From basic digital scales to Bluetooth smart trackers &mdash; we break down BIA technology, accuracy, app features and real value for money.</p>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 11, 2026 &middot; &#x23F1; 10 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">COMPARISON &rarr;</span>
+            </div>
           </div>
         </article>
-
-        <!-- Massage Guns -->
         <article class="blog-card">
-          <div class="thumbnail" style="background: linear-gradient(135deg, #1B6B4A 0%, #2ECC71 100%);">
-            💆
-            <span class="thumb-label">BUYER'S GUIDE</span>
-          </div>
+          <a href="article1.html" class="thumb" style="background: linear-gradient(135deg, #1B6B4A 0%, #2ECC71 100%);" aria-label="Read Best Massage Guns in 2026: Expert Reviews &amp; Buying Guide">
+            &#x1F486;
+          </a>
           <div class="card-body">
-            <div class="card-meta"><span>📅 Sep 8, 2026</span><span>⏱ 12 min read</span></div>
             <h3>Best Massage Guns in 2026: Expert Reviews &amp; Buying Guide</h3>
-            <p class="excerpt">Our team evaluated the top percussion massage guns of 2026 across performance, build quality, and value. See which models deliver effective deep tissue recovery for athletes and everyday users.</p>
-            <a href="article1.html" class="read-link">Read Review →</a>
+            <p class="excerpt">Our team evaluated the top percussion massage guns of 2026 across performance, build quality, and value. See which models deliver effective deep tissue recovery.</p>
+            <div class="card-footer">
+              <span class="card-meta">&#x1F4C5; Sep 8, 2026 &middot; &#x23F1; 12 min</span>
+              <span class="product-count">5 Products</span>
+              <span class="read-link">BUYER&#x27;S GUIDE &rarr;</span>
+            </div>
           </div>
         </article>
       </div>
 
       <div class="more-wrap">
-        <button type="button" class="btn-more" id="showMoreReviews">Show all reviews</button>
+        <button type="button" class="btn-more" id="showMoreReviews">See all 16 reviews</button>
       </div>
     </div>
   </section>
