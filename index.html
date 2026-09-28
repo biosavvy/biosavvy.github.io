@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://biosavvy.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BioSavvy">
+  <meta property="og:title" content="BioSavvy — Science-Backed Health Product Reviews">
+  <meta property="og:description" content="BioSavvy reviews health gadgets, supplements and fitness gear with evidence, not hype. Browse all our in-depth buyer&#x27;s guides in one place.">
+  <meta property="og:url" content="https://biosavvy.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BioSavvy — Science-Backed Health Product Reviews">
+  <meta name="twitter:description" content="BioSavvy reviews health gadgets, supplements and fitness gear with evidence, not hype. Browse all our in-depth buyer&#x27;s guides in one place.">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "BioSavvy", "url": "https://biosavvy.netlify.app/", "description": "BioSavvy reviews health gadgets, supplements and fitness gear with evidence, not hype. Browse all our in-depth buyer's guides in one place."}</script>
+  <title>BioSavvy — Science-Backed Health Product Reviews</title>
+  <meta name="description" content="BioSavvy reviews health gadgets, supplements and fitness gear with evidence, not hype. Browse all our in-depth buyer's guides in one place.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B6B4A;
+      --primary-dark: #134E34;
+      --primary-light: #E8F5EE;
+      --accent: #F59E0B;
+      --text: #1F2937;
+      --text-light: #6B7280;
+      --bg: #FAFBFC;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+      --nav-h: 62px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    section { scroll-margin-top: calc(var(--nav-h) + 12px); }
+
+    a { -webkit-tap-highlight-color: transparent; }
+
+    /* ---------- Top Nav ---------- */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .topnav .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 18px;
+      letter-spacing: 0.3px;
+    }
+
+    .topnav .brand .dna { font-size: 22px; }
+
+    .topnav nav { display: flex; gap: 26px; }
+
+    .topnav nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .topnav nav a:hover { color: var(--primary); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 84px 20px 66px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      font-size: 16px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+
+    .hero-logo .icon { font-size: 40px; display: block; margin-bottom: 10px; }
+
+    .hero h1 { font-size: 44px; font-weight: 700; margin-bottom: 18px; line-height: 1.18; }
+
+    .hero p { font-size: 18px; max-width: 620px; margin: 0 auto 34px; opacity: 0.92; }
+
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary { background: #fff; color: var(--primary-dark); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+
+    .btn-ghost { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.45); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
+
+    /* ---------- Value / Trust bar ---------- */
+    .value-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 26px 20px;
+    }
+
+    .value-bar .items {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .value-item { text-align: center; font-size: 13.5px; color: var(--text-light); max-width: 160px; }
+    .value-item .vicon { font-size: 26px; display: block; margin-bottom: 6px; }
+    .value-item strong { color: var(--primary); display: block; font-size: 15px; margin-bottom: 2px; }
+
+    /* ---------- Section heading ---------- */
+    .sec-head { text-align: center; margin-bottom: 42px; }
+    .sec-head .eyebrow {
+      font-size: 12.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .sec-head h2 { font-size: 29px; margin-bottom: 8px; }
+    .sec-head .subtitle { color: var(--text-light); font-size: 15.5px; }
+
+    /* ---------- Categories ---------- */
+    .categories { padding: 64px 20px; max-width: 980px; margin: 0 auto; }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .cat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 22px;
+      text-align: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .cat-card:hover { box-shadow: 0 6px 22px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .cat-card .emoji { font-size: 38px; margin-bottom: 12px; }
+    .cat-card h3 { font-size: 16.5px; margin-bottom: 8px; color: var(--primary); }
+    .cat-card p { font-size: 14px; color: var(--text-light); }
+
+    /* ---------- Reviews (Archive) ---------- */
+    .reviews { background: var(--primary-light); padding: 64px 20px; }
+
+    .reviews .blog-section { max-width: 1040px; margin: 0 auto; }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+
+    .blog-card .thumbnail {
+      height: 176px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 54px;
+      position: relative;
+    }
+    .blog-card .thumbnail .thumb-label {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      background: rgba(0,0,0,0.38);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .blog-card .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card .card-meta {
+      font-size: 12px; color: var(--text-light); margin-bottom: 9px;
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .blog-card h3 { font-size: 17px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; color: var(--text); }
+    .blog-card .excerpt { font-size: 14px; color: var(--text-light); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+    .blog-card .read-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--primary); font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .blog-card .read-link:hover { gap: 9px; }
+
+    /* ---------- Process ---------- */
+    .process { padding: 64px 20px; }
+    .process .steps {
+      display: flex; justify-content: center; gap: 28px;
+      flex-wrap: nowrap; max-width: 980px; margin: 0 auto;
+    }
+    .step { text-align: center; flex: 1 1 0; min-width: 0; }
+    .step .num {
+      width: 40px; height: 40px; background: var(--primary); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; margin: 0 auto 12px; font-size: 17px;
+    }
+    .step h3 { font-size: 16px; margin-bottom: 6px; }
+    .step p { font-size: 13.5px; color: var(--text-light); }
+
+    /* ---------- Reviews: load more ---------- */
+    .more-wrap { text-align: center; margin-top: 30px; }
+    .btn-more {
+      display: inline-block; background: var(--white); color: var(--primary);
+      border: 1.5px solid var(--primary); padding: 12px 30px; border-radius: 8px;
+      font-size: 14.5px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-more:hover { background: var(--primary); color: #fff; }
+    .blog-card.card-hidden { display: none !important; }
+
+    /* ---------- CTA ---------- */
+    .cta { text-align: center; padding: 64px 20px; max-width: 640px; margin: 0 auto; }
+    .cta h2 { font-size: 29px; margin-bottom: 12px; }
+    .cta p { color: var(--text-light); margin-bottom: 26px; }
+    .cta-btn {
+      display: inline-block; background: var(--primary); color: #fff;
+      text-decoration: none; padding: 15px 36px; border-radius: 8px;
+      font-weight: 600; font-size: 16px; transition: background 0.2s, transform 0.15s;
+    }
+    .cta-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 34px 20px;
+      font-size: 13px;
+    }
+    footer .foot-links { margin-top: 10px; }
+    footer a { color: rgba(255,255,255,0.82); text-decoration: none; margin: 0 8px; }
+    footer a:hover { text-decoration: underline; }
+
+    .disclaimer { text-align: center; padding: 14px 20px 26px; font-size: 11px; color: #9CA3AF; max-width: 760px; margin: 0 auto; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      .topnav { padding: 0 16px; }
+      .topnav nav { gap: 16px; }
+      .topnav nav a { font-size: 13.5px; }
+      .hero { padding: 60px 18px 50px; }
+      .hero h1 { font-size: 31px; }
+      .hero p { font-size: 16px; }
+      .btn { padding: 13px 24px; font-size: 15px; }
+      .value-bar .items { gap: 26px; }
+      .sec-head h2, .cta h2 { font-size: 24px; }
+      .categories, .reviews, .process, .cta { padding-left: 16px; padding-right: 16px; }
+      .process .steps { gap: 10px; }
+      .step h3 { font-size: 13.5px; }
+      .step p { font-size: 11.5px; }
+    }
+
+    /* ---------- Print ---------- */
+    @media print {
+      .topnav, .hero-actions, .cta, .blog-card .read-link { display: none !important; }
+      .blog-card.card-hidden { display: block !important; }
+      .more-wrap { display: none !important; }
+      body { background: #fff; }
+      .reviews { background: #fff; padding: 20px 0; }
+      .blog-card, .cat-card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Top Nav -->
+  <header class="topnav">
+    <a class="brand" href="#top"><span class="dna">🧬</span> BioSavvy</a>
+    <nav>
+      <a href="#reviews">Reviews</a>
+      <a href="#categories">Categories</a>
+      <a href="#process">How We Test</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-logo">
+      <span class="icon">🧬</span>
+      BioSavvy
+    </div>
+    <h1>Health Products,<br>Scientifically Reviewed</h1>
+    <p>We break down health gadgets, supplements &amp; fitness gear with evidence, not hype — so you can find what actually works and skip the rest.</p>
+    <div class="hero-actions">
+      <a href="#reviews" class="btn btn-primary">Browse All Reviews</a>
+      <a href="#process" class="btn btn-ghost">How We Test</a>
+    </div>
+  </section>
+
+  <!-- Value bar -->
+  <section class="value-bar" aria-label="What we stand for">
+    <div class="items">
+      <div class="value-item">
+        <span class="vicon">🔬</span>
+        <strong>Science, Not Hype</strong>
+        Claims checked against evidence and real specs
+      </div>
+      <div class="value-item">
+        <span class="vicon">🚫</span>
+        <strong>No Paid Placements</strong>
+        We don't sell rankings or positive reviews
+      </div>
+      <div class="value-item">
+        <span class="vicon">📊</span>
+        <strong>Evidence-Based Scores</strong>
+        Performance, value, safety and durability
+      </div>
+      <div class="value-item">
+        <span class="vicon">🔄</span>
+        <strong>Updated Regularly</strong>
+        Guides refreshed as products change
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories" id="categories">
+    <div class="sec-head">
+      <div class="eyebrow">What We Review</div>
+      <h2>Browse by Category</h2>
+      <p class="subtitle">Science-backed picks across health &amp; wellness</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="emoji">💪</div>
+        <h3>Fitness Equipment</h3>
+        <p>Resistance bands, massage guns, yoga mats, foam rollers — tested for real workouts</p>
+      </div>
+      <div class="cat-card">
+        <div class="emoji">⌚</div>
+        <h3>Smart Health Devices</h3>
+        <p>Body scales, fitness trackers, blood pressure monitors — accuracy tested</p>
+      </div>
+      <div class="cat-card">
+        <div class="emoji">🧘</div>
+        <h3>Recovery &amp; Wellness</h3>
+        <p>Neck massagers, foot spas, supplements — evaluated by researchers</p>
+      </div>
+      <div class="cat-card">
+        <div class="emoji">🍵</div>
+        <h3>Tea &amp; Wellness</h3>
+        <p>Chinese tea sets, wellness teas, herbal products — culturally authentic picks</p>
+      </div>
+      <div class="cat-card">
+        <div class="emoji">🏃</div>
+        <h3>Sportswear</h3>
+        <p>Running shoes, compression gear, sports bras — performance tested</p>
+      </div>
+      <div class="cat-card">
+        <div class="emoji">🍳</div>
+        <h3>Kitchen Health</h3>
+        <p>Air fryer accessories, blenders, meal prep tools — healthy cooking essentials</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews / Archive -->
+  <section class="reviews" id="reviews">
+    <div class="blog-section">
+      <div class="sec-head">
+        <div class="eyebrow">The Archive</div>
+        <h2>Latest Reviews</h2>
+        <p class="subtitle">Our latest in-depth guides — browse the full archive whenever you like</p>
+      </div>
+
+      <div class="blog-grid">
+
+        <!-- Pure Titanium Thermos -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #6366F1 0%, #A78BFA 100%);">
+            &#x1F964;
+            <span class="thumb-label">PREMIUM PICKS</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 9 min read</span></div>
+            <h3>Best Pure Titanium Thermos Cups in 2026: 5 Top Picks from $75</h3>
+            <p class="excerpt">Lightweight, taste-neutral, and built to last &mdash; we compared 5 pure titanium thermos cups on insulation, capacity and craftsmanship.</p>
+            <a href="article11.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Neck & Shoulder Massagers -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);">
+            &#x1F486;
+            <span class="thumb-label">WELLNESS PICKS</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 10 min read</span></div>
+            <h3>Best Neck &amp; Shoulder Massagers in 2026: 5 Top Picks from $34</h3>
+            <p class="excerpt">From kneading shiatsu to EMS pulse devices &mdash; we compared 5 neck massagers on comfort, heat function and tension relief.</p>
+            <a href="article10.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Herbal Foot Bath -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #65A30D 0%, #A3E635 100%);">
+            &#x1F33F;
+            <span class="thumb-label">NATURAL CARE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 8 min read</span></div>
+            <h3>Best Herbal Foot Bath Products in 2026: 5 Top Picks from $17</h3>
+            <p class="excerpt">Mugwort, wormwood and TCM herbal blends &mdash; we compared 5 foot soak products on ingredients, scent and relaxation value.</p>
+            <a href="article9.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Smart Watches -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);">
+            &#x231A;
+            <span class="thumb-label">TECH REVIEW</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 10 min read</span></div>
+            <h3>Best Smart Watches in 2026: 5 Top Picks from $41</h3>
+            <p class="excerpt">From a $60 outdoor GPS watch (92% off) to AMOLED 5G models &mdash; we compared 5 smart watches on sensors, battery and build quality.</p>
+            <a href="article8.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Electric Mixing Cups -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);">
+            &#x1F964;
+            <span class="thumb-label">FITNESS GEAR</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 8 min read</span></div>
+            <h3>Best Electric Mixing Cups &amp; Shakers in 2026: 5 Top Picks from $3</h3>
+            <p class="excerpt">USB-rechargeable, self-stirring protein shakers from $3.46 to $22.70 &mdash; compared on capacity, mixing power and ease of cleaning.</p>
+            <a href="article7.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Electric Foot Bath -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);">
+            &#x1F6C1;
+            <span class="thumb-label">RELAXATION</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 28, 2026</span><span>&#x23F1; 9 min read</span></div>
+            <h3>Best Electric Foot Bath Devices in 2026: 5 Top Picks from $51</h3>
+            <p class="excerpt">Heated soaking, massage rollers and folding portable designs &mdash; we compared 5 electric foot baths on features, comfort and value.</p>
+            <a href="article6.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Neck Massagers (original article 5) -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #DC2626 0%, #F87171 100%);">
+            🦴
+            <span class="thumb-label">HEALTH PICKS</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>📅 Sep 23, 2026</span><span>⏱ 11 min read</span></div>
+            <h3>Best Neck Massagers in 2026: EMS, Shiatsu &amp; Heated Options Reviewed</h3>
+            <p class="excerpt">From EMS pulse devices to heated kneading shawls — 5 massagers compared on comfort, intensity, portability and value.</p>
+            <a href="article5.html" class="read-link">Read Review →</a>
+          </div>
+        </article>
+
+        <!-- Yoga Mats -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);">
+            🧘
+            <span class="thumb-label">MATERIAL GUIDE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>📅 Sep 22, 2026</span><span>⏱ 10 min read</span></div>
+            <h3>Best Yoga Mats in 2026: TPE, Rubber, Cork &amp; More — Which Is Right for You?</h3>
+            <p class="excerpt">From $3 budget mats to premium natural rubber and eco cork blends — compared by material, grip, thickness and value.</p>
+            <a href="article4.html" class="read-link">Read Review →</a>
+          </div>
+        </article>
+
+        <!-- Resistance Bands -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #9333EA 0%, #EC4899 100%);">
+            🏋️
+            <span class="thumb-label">COMPLETE GUIDE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>📅 Sep 21, 2026</span><span>⏱ 10 min read</span></div>
+            <h3>Best Resistance Bands in 2026: A Complete Buyer's Guide</h3>
+            <p class="excerpt">Latex tubes, fabric loops or full 11-piece sets? We compare 5 top-rated band sets for home workouts, glute training and beginners.</p>
+            <a href="article3.html" class="read-link">Read Review →</a>
+          </div>
+        </article>
+
+        <!-- Body Scales -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);">
+            ⚖️
+            <span class="thumb-label">COMPARISON</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>📅 Sep 20, 2026</span><span>⏱ 10 min read</span></div>
+            <h3>Best Smart Body Scales in 2026: Which One Is Actually Accurate?</h3>
+            <p class="excerpt">From $7 basic scales to Bluetooth smart trackers — we break down BIA technology, accuracy, app features and real value.</p>
+            <a href="article2.html" class="read-link">Read Review →</a>
+          </div>
+        </article>
+
+        <!-- Massage Guns -->
+        <article class="blog-card">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #1B6B4A 0%, #2ECC71 100%);">
+            💆
+            <span class="thumb-label">BUYER'S GUIDE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>📅 Sep 19, 2026</span><span>⏱ 12 min read</span></div>
+            <h3>Best Massage Guns in 2026: 5 Top Picks Under $86</h3>
+            <p class="excerpt">From budget mini rods to heated premium models — we compared 5 percussive massage guns on power, battery, noise and value.</p>
+            <a href="article1.html" class="read-link">Read Review →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="more-wrap">
+        <button type="button" class="btn-more" id="showMoreReviews">Show all reviews</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process" id="process">
+    <div class="sec-head">
+      <div class="eyebrow">Our Method</div>
+      <h2>How We Test</h2>
+      <p class="subtitle">A repeatable process behind every recommendation</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Research</h3>
+        <p>We analyze specs, materials and the scientific claims behind each product</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Compare</h3>
+        <p>Products are benchmarked head-to-head on measurable criteria</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Score</h3>
+        <p>Transparent scoring for performance, value, safety and durability</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Recommend</h3>
+        <p>Honest picks with clear pros, cons and who each is best for</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Shop Smarter, Not Harder</h2>
+    <p>Browse our latest reviews and find health products that actually work — backed by evidence, not marketing budgets.</p>
+    <a href="#reviews" class="cta-btn">Explore the Reviews →</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 BioSavvy. All rights reserved.</p>
+    <div class="foot-links">
+      <a href="#top">Home</a>·
+      <a href="#reviews">Reviews</a>·
+      <a href="#categories">Categories</a>·
+      <a href="#process">How We Test</a>
+    </div>
+    <div class="foot-links">
+      <a href="#process">About</a>·<a href="#top">Privacy Policy</a>·<a href="#top">Contact</a>
+    </div>
+  </footer>
+  <p class="disclaimer">Disclaimer: Content on this site is for informational purposes only. We may earn a commission from purchases made through affiliate links, at no extra cost to you. We do not guarantee the accuracy of product information; always verify details before buying.</p>
+
+  <script>
+    (function () {
+      var INITIAL = 6;
+      var grid = document.querySelector('.reviews .blog-grid');
+      var btn = document.getElementById('showMoreReviews');
+      if (!grid || !btn) return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
+      var wrap = btn.closest('.more-wrap');
+      if (cards.length <= INITIAL) { if (wrap) wrap.style.display = 'none'; return; }
+
+      cards.forEach(function (c, i) {
+        if (i >= INITIAL) c.classList.add('card-hidden');
+      });
+
+      btn.addEventListener('click', function () {
+        cards.forEach(function (c) { c.classList.remove('card-hidden'); });
+        if (wrap) wrap.style.display = 'none';
+      });
+    })();
+  </script>
+
+</body>
+</html>
