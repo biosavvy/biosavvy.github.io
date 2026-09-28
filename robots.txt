@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://biosavvy.netlify.app/sitemap.xml
+Sitemap: https://biosavvy.github.io/sitemap.xml
