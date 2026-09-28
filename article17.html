@@ -762,7 +762,205 @@
   .logo-bar nav { gap: 18px; }
   .logo-bar nav a { font-size: 0.88rem; }
   .section-title { font-size: 1.5rem; }
-  }</style>
+  }
+  /* ======= ENRICHED LAYOUT — 2-col products + quick nav ======= */
+  .product-card.product-6 .card-header,
+  .product-card.product-7 .card-header,
+  .product-card.product-8 .card-header,
+  .product-card.product-9 .card-header,
+  .product-card.product-10 .card-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .products-grid > .product-card { margin-bottom: 0; }
+  .products-grid > .product-card:nth-child(odd):last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
+    justify-self: center;
+  }
+  .products-grid .card-product-image { max-width: 220px; }
+  .products-grid .card-header { padding: 18px 20px; }
+  .products-grid .card-header h2 { font-size: 1.15rem; }
+  .products-grid .card-price { font-size: 1.45rem; }
+  .products-grid .card-body { padding: 8px 20px 20px; }
+  .products-grid .card-description { font-size: 0.9rem; }
+  .products-grid .specs-grid { gap: 8px; }
+
+  .product-quick-nav {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+  }
+  .product-quick-nav h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .pq-nav-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .pq-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    flex: 1;
+    min-width: 160px;
+  }
+  .pq-nav-item:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  .pq-nav-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pq-nav-emoji { font-size: 1.1rem; flex-shrink: 0; }
+  .pq-nav-text { line-height: 1.2; }
+  .pq-nav-price {
+    margin-left: auto;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .trust-strip {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  .trust-icon { font-size: 1.5rem; }
+
+  .quick-tips-section { padding: 0 0 30px; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tip-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .tip-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tip-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .tip-card p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    .products-grid > .product-card:nth-child(odd):last-child {
+      max-width: 100%;
+    }
+    .pq-nav-item { min-width: 130px; }
+    .trust-strip { flex-direction: column; gap: 12px; }
+    .tips-grid { grid-template-columns: 1fr; }
+  }
+
+  </style>
 </head>
 <body>
 
@@ -892,12 +1090,97 @@
   </div>
 </section>
 
+<!-- ============ TRUST STRIP ============ -->
+<div class="container">
+ <div class="trust-strip">
+  <div class="trust-item">
+   <span class="trust-icon">&#x1F50D;</span>
+   <span><strong>Research-Backed</strong> &mdash; We analyze specs, materials &amp; real user reviews</span>
+  </div>
+  <div class="trust-item">
+   <span class="trust-icon">&#x1F4B0;</span>
+   <span><strong>Price Tracked</strong> &mdash; Updated regularly to catch the best deals</span>
+  </div>
+  <div class="trust-item">
+   <span class="trust-icon">&#x2B50;</span>
+   <span><strong>Independently Rated</strong> &mdash; No brand sponsorships influence our picks</span>
+  </div>
+ </div>
+</div>
+
+
+<!-- ============ QUICK BUYING TIPS ============ -->
+<section class="quick-tips-section">
+ <div class="container">
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-number">1</div>
+      <h4>&#x26A1; EMF Safety First</h4>
+      <p>True zero-EMF or ultra-low EMF is critical for safe overnight use. Ask for test data.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">2</div>
+      <h4>&#x1F48E; Crystal Quality</h4>
+      <p>Genuine amethyst/tourmaline/jade stones. Pads without real stones are marketing, not therapy.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">3</div>
+      <h4>&#x1F4CF; Size &amp; Coverage</h4>
+      <p>Single (60x28): targeted back. Full-body (71x31): head-to-toe. Measure your space first.</p>
+    </div>
+  </div>
+ </div>
+</section>
+
+
+<!-- ============ QUICK PRODUCT NAVIGATION ============ -->
+<section class="quick-nav-section">
+ <div class="container">
+  <div class="product-quick-nav">
+   <h3>&#x1F4CB; All Products at a Glance</h3>
+   <div class="pq-nav-list">
+    <a href="#product-1" class="pq-nav-item">
+      <span class="pq-nav-num">1</span>
+      <span class="pq-nav-emoji">🔴</span>
+      <span class="pq-nav-text">Crystal Photon Energy Mattress Far Infrared</span>
+      <span class="pq-nav-price">$380.13</span>
+    </a>
+    <a href="#product-2" class="pq-nav-item">
+      <span class="pq-nav-num">2</span>
+      <span class="pq-nav-emoji">💎</span>
+      <span class="pq-nav-text">NON-EMF Bio Crystal Infrared Negative Ions Amethyst Mattress</span>
+      <span class="pq-nav-price">$481.80</span>
+    </a>
+    <a href="#product-3" class="pq-nav-item">
+      <span class="pq-nav-num">3</span>
+      <span class="pq-nav-emoji">💡</span>
+      <span class="pq-nav-text">Full Body Red Light Mat 71x31inch Large Infrared</span>
+      <span class="pq-nav-price">$278.84</span>
+    </a>
+    <a href="#product-4" class="pq-nav-item">
+      <span class="pq-nav-num">4</span>
+      <span class="pq-nav-emoji">💚</span>
+      <span class="pq-nav-text">Far Infrared Heating Jade Mat PEMF Magnetic Therapy</span>
+      <span class="pq-nav-price">$352.57</span>
+    </a>
+    <a href="#product-5" class="pq-nav-item">
+      <span class="pq-nav-num">5</span>
+      <span class="pq-nav-emoji">🌈</span>
+      <span class="pq-nav-text">FUMEI 7 Crystal Stone Far Infrared PEMF Mat 190x80cm</span>
+      <span class="pq-nav-price">$334.57</span>
+    </a>
+   </div>
+  </div>
+ </div>
+</section>
+
 <!-- ============ PRODUCT CARDS ============ -->
 <section class="products-section">
   <div class="container">
+  <div class="products-grid">
 
     <!-- ===== PRODUCT 1 — CRYSTAL PHOTON ENERGY MATTRESS — BEST OVERALL ===== -->
-    <article class="product-card product-1">
+    <article class="product-card product-1" id="product-1">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F534;</span>
@@ -977,7 +1260,7 @@
     </article>
 
     <!-- ===== PRODUCT 2 — NON-EMF BIO CRYSTAL AMETHYST — BEST PREMIUM ===== -->
-    <article class="product-card product-2">
+    <article class="product-card product-2" id="product-2">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F48E;</span>
@@ -1057,7 +1340,7 @@
     </article>
 
     <!-- ===== PRODUCT 3 — FULL BODY RED LIGHT MAT — BEST VALUE ===== -->
-    <article class="product-card product-3">
+    <article class="product-card product-3" id="product-3">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F4A1;</span>
@@ -1137,7 +1420,7 @@
     </article>
 
     <!-- ===== PRODUCT 4 — FAR INFRARED HEATING JADE MAT — BEST JADE ===== -->
-    <article class="product-card product-4">
+    <article class="product-card product-4" id="product-4">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F49A;</span>
@@ -1217,7 +1500,7 @@
     </article>
 
     <!-- ===== PRODUCT 5 — FUMEI 7 CRYSTAL STONE MAT — BEST MULTI-STONE ===== -->
-    <article class="product-card product-5">
+    <article class="product-card product-5" id="product-5">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F308;</span>
@@ -1296,7 +1579,9 @@
       </div>
     </article>
 
-  </div>
+    </div> <!-- /.products-grid -->
+
+ </div>
 </section>
 
 <!-- ============ SCIENCE / INFO BOX ============ -->
@@ -1477,6 +1762,8 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#x2191;</button>
+
 <script>
 (function() {
   // This article is scheduled for September 30, 2026
@@ -1486,6 +1773,14 @@
   if (today < scheduledDate) {
     document.body.style.display = 'none';
   }
+
+// Back to top button
+var btt = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 500) { btt.classList.add('visible'); }
+  else { btt.classList.remove('visible'); }
+});
+
 })();
 </script>
 

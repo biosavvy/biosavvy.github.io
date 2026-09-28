@@ -792,6 +792,204 @@
       .logo-bar nav a { font-size: 0.88rem; }
       .section-title { font-size: 1.5rem; }
     }
+  
+  /* ======= ENRICHED LAYOUT — 2-col products + quick nav ======= */
+  .product-card.product-6 .card-header,
+  .product-card.product-7 .card-header,
+  .product-card.product-8 .card-header,
+  .product-card.product-9 .card-header,
+  .product-card.product-10 .card-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .products-grid > .product-card { margin-bottom: 0; }
+  .products-grid > .product-card:nth-child(odd):last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
+    justify-self: center;
+  }
+  .products-grid .card-product-image { max-width: 220px; }
+  .products-grid .card-header { padding: 18px 20px; }
+  .products-grid .card-header h2 { font-size: 1.15rem; }
+  .products-grid .card-price { font-size: 1.45rem; }
+  .products-grid .card-body { padding: 8px 20px 20px; }
+  .products-grid .card-description { font-size: 0.9rem; }
+  .products-grid .specs-grid { gap: 8px; }
+
+  .product-quick-nav {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+  }
+  .product-quick-nav h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .pq-nav-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .pq-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    flex: 1;
+    min-width: 160px;
+  }
+  .pq-nav-item:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  .pq-nav-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pq-nav-emoji { font-size: 1.1rem; flex-shrink: 0; }
+  .pq-nav-text { line-height: 1.2; }
+  .pq-nav-price {
+    margin-left: auto;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .trust-strip {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  .trust-icon { font-size: 1.5rem; }
+
+  .quick-tips-section { padding: 0 0 30px; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tip-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .tip-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tip-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .tip-card p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    .products-grid > .product-card:nth-child(odd):last-child {
+      max-width: 100%;
+    }
+    .pq-nav-item { min-width: 130px; }
+    .trust-strip { flex-direction: column; gap: 12px; }
+    .tips-grid { grid-template-columns: 1fr; }
+  }
+
   </style>
 </head>
 <body>
@@ -923,12 +1121,97 @@
   </div>
 </section>
 
+<!-- ============ TRUST STRIP ============ -->
+<div class="container">
+ <div class="trust-strip">
+  <div class="trust-item">
+   <span class="trust-icon">&#x1F50D;</span>
+   <span><strong>Research-Backed</strong> &mdash; We analyze specs, materials &amp; real user reviews</span>
+  </div>
+  <div class="trust-item">
+   <span class="trust-icon">&#x1F4B0;</span>
+   <span><strong>Price Tracked</strong> &mdash; Updated regularly to catch the best deals</span>
+  </div>
+  <div class="trust-item">
+   <span class="trust-icon">&#x2B50;</span>
+   <span><strong>Independently Rated</strong> &mdash; No brand sponsorships influence our picks</span>
+  </div>
+ </div>
+</div>
+
+
+<!-- ============ QUICK BUYING TIPS ============ -->
+<section class="quick-tips-section">
+ <div class="container">
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-number">1</div>
+      <h4>&#x1F525; Heat Is Essential</h4>
+      <p>Heat + massage together relieve 3x more tension than massage alone. Look for infrared heating.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">2</div>
+      <h4>&#x1F3AF; Target Area</h4>
+      <p>Neck-only: pillow style. Neck + shoulders: over-chair style. Full upper body: shiatsu massager.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">3</div>
+      <h4>&#x1F50C; Corded vs Cordless</h4>
+      <p>Corded = unlimited runtime, consistent heat. Cordless = freedom but shorter sessions.</p>
+    </div>
+  </div>
+ </div>
+</section>
+
+
+<!-- ============ QUICK PRODUCT NAVIGATION ============ -->
+<section class="quick-nav-section">
+ <div class="container">
+  <div class="product-quick-nav">
+   <h3>&#x1F4CB; All Products at a Glance</h3>
+   <div class="pq-nav-list">
+    <a href="#product-1" class="pq-nav-item">
+      <span class="pq-nav-num">1</span>
+      <span class="pq-nav-emoji">🔵</span>
+      <span class="pq-nav-text">Raymax Bionic Neck Shoulder Massager N7</span>
+      <span class="pq-nav-price">$41.03</span>
+    </a>
+    <a href="#product-2" class="pq-nav-item">
+      <span class="pq-nav-num">2</span>
+      <span class="pq-nav-emoji">🟣</span>
+      <span class="pq-nav-text">Pulse Neck Massager Portable Cervical Device</span>
+      <span class="pq-nav-price">$115.73</span>
+    </a>
+    <a href="#product-3" class="pq-nav-item">
+      <span class="pq-nav-num">3</span>
+      <span class="pq-nav-emoji">🟢</span>
+      <span class="pq-nav-text">Smart Library Heated Shawl Neck & Shoulder Massager</span>
+      <span class="pq-nav-price">$230.17</span>
+    </a>
+    <a href="#product-4" class="pq-nav-item">
+      <span class="pq-nav-num">4</span>
+      <span class="pq-nav-emoji">🟠</span>
+      <span class="pq-nav-text">Electric Kneading Massager Heated Back & Neck Pillow</span>
+      <span class="pq-nav-price">$69.48</span>
+    </a>
+    <a href="#product-5" class="pq-nav-item">
+      <span class="pq-nav-num">5</span>
+      <span class="pq-nav-emoji">🟡</span>
+      <span class="pq-nav-text">Electric Kneading Neck Deep Massage Pillow</span>
+      <span class="pq-nav-price">$33.50</span>
+    </a>
+   </div>
+  </div>
+ </div>
+</section>
+
 <!-- ============ PRODUCT CARDS ============ -->
 <section class="products-section">
   <div class="container">
+  <div class="products-grid">
 
     <!-- ===== PRODUCT 1 — RAYMAX BIONIC N7 (BLUE) — BEST OVERALL ===== -->
-    <article class="product-card product-1">
+    <article class="product-card product-1" id="product-1">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F535;</span>
@@ -1008,7 +1291,7 @@
     </article>
 
     <!-- ===== PRODUCT 2 — PULSE NECK MASSAGER (PURPLE) — PREMIUM PICK ===== -->
-    <article class="product-card product-2">
+    <article class="product-card product-2" id="product-2">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E3;</span>
@@ -1088,7 +1371,7 @@
     </article>
 
     <!-- ===== PRODUCT 3 — SMART LIBRARY HEATED SHAWL (TEAL) — BEST SELLER ===== -->
-    <article class="product-card product-3">
+    <article class="product-card product-3" id="product-3">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E2;</span>
@@ -1168,7 +1451,7 @@
     </article>
 
     <!-- ===== PRODUCT 4 — ELECTRIC KNEADING HEATED PILLOW (ORANGE) — BEST VALUE ===== -->
-    <article class="product-card product-4">
+    <article class="product-card product-4" id="product-4">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E0;</span>
@@ -1248,7 +1531,7 @@
     </article>
 
     <!-- ===== PRODUCT 5 — ELECTRIC KNEADING DEEP MASSAGE (YELLOW) — BUDGET PICK ===== -->
-    <article class="product-card product-5">
+    <article class="product-card product-5" id="product-5">
       <div class="card-header">
         <div class="card-header-left">
           <span class="card-emoji">&#x1F7E1;</span>
@@ -1327,7 +1610,9 @@
       </div>
     </article>
 
-  </div>
+    </div> <!-- /.products-grid -->
+
+ </div>
 </section>
 
 <!-- ============ SCIENCE / INFO BOX ============ -->
@@ -1501,6 +1786,19 @@
     </div>
   </div>
 </footer>
+
+
+<!-- Back to top button -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#x2191;</button>
+<script>
+(function() {
+  var btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 500) { btt.classList.add('visible'); }
+    else { btt.classList.remove('visible'); }
+  });
+})();
+</script>
 
 </body>
 </html>
