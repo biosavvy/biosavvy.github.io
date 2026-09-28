@@ -262,6 +262,8 @@
     }
     .btn-more:hover { background: var(--primary); color: #fff; }
     .blog-card.card-hidden { display: none !important; }
+    .blog-card.blog-card-scheduled { display: none !important; }
+    .blog-card.blog-card-scheduled.is-visible { display: flex !important; }
 
     /* ---------- CTA ---------- */
     .cta { text-align: center; padding: 64px 20px; max-width: 640px; margin: 0 auto; }
@@ -419,6 +421,34 @@
       </div>
 
       <div class="blog-grid">
+
+        <!-- Scheduled: Percussion Massage Guns (Sep 29) -->
+        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-29">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #6366F1 0%, #A78BFA 100%);">
+            &#x1F4AA;
+            <span class="thumb-label">FITNESS GEAR</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 29, 2026</span><span>&#x23F1; 9 min read</span></div>
+            <h3>Best Percussion Massage Guns in 2026: 5 Top Picks from $40</h3>
+            <p class="excerpt">We compared 5 top percussion massage guns from $40 to $229 &mdash; see which delivers real deep tissue recovery at the best price.</p>
+            <a href="article16.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Scheduled: Ice Bath & Cold Plunge (Sep 30) -->
+        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
+          <div class="thumbnail" style="background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);">
+            &#x1F9CA;
+            <span class="thumb-label">RECOVERY</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>&#x1F4C5; Sep 30, 2026</span><span>&#x23F1; 9 min read</span></div>
+            <h3>Best Ice Bath &amp; Cold Plunge Tubs in 2026: 5 Top Picks from $50</h3>
+            <p class="excerpt">Cold plunge therapy reduces inflammation and accelerates recovery &mdash; we compared 5 portable ice baths on insulation, durability and value.</p>
+            <a href="article17.html" class="read-link">Read Review &rarr;</a>
+          </div>
+        </article>
 
         <!-- Pure Titanium Thermos -->
         <article class="blog-card">
@@ -693,6 +723,20 @@
       btn.addEventListener('click', function () {
         cards.forEach(function (c) { c.classList.remove('card-hidden'); });
         if (wrap) wrap.style.display = 'none';
+      });
+    })();
+
+    // Scheduled article reveal
+    (function () {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var scheduled = document.querySelectorAll('.blog-card-scheduled[data-schedule-date]');
+      scheduled.forEach(function (card) {
+        var dateStr = card.getAttribute('data-schedule-date');
+        var pubDate = new Date(dateStr + 'T00:00:00');
+        if (today >= pubDate) {
+          card.classList.add('is-visible');
+        }
       });
     })();
   </script>
