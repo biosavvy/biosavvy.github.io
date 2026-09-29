@@ -819,76 +819,7 @@
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   }
 
-  .product-quick-nav {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px 28px;
-    margin-bottom: 32px;
-  }
-  .product-quick-nav h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-  .pq-nav-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .pq-nav-list .pq-nav-item:last-child:nth-child(3n-1) {
-    grid-column: 1 / -1;
-    max-width: calc(50% - 5px);
-    justify-self: center;
-  }
-  .pq-nav-list .pq-nav-item:last-child:nth-child(3n-2) {
-    grid-column: 2;
-  }
-  .pq-nav-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.15s ease;
-    flex: 1;
-    min-width: 160px;
-  }
-  .pq-nav-item:hover {
-    border-color: var(--primary);
-    background: var(--primary-light);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-  }
-  .pq-nav-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .pq-nav-emoji { font-size: 1.1rem; flex-shrink: 0; }
-  .pq-nav-text { line-height: 1.2; }
-  .pq-nav-price {
-    margin-left: auto;
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
+
 
   .trust-strip {
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
@@ -985,7 +916,6 @@
   }
 
   @media (max-width: 768px) {
-    .pq-nav-item { min-width: 130px; }
     .trust-strip { flex-direction: column; gap: 12px; }
     .tips-grid { grid-template-columns: 1fr; }
   }
@@ -1160,48 +1090,6 @@
       <h4>&#x1F4E6; Complete Sets Win</h4>
       <p>Handles, ankle straps, and door anchor expand your exercise library 3x over bare bands.</p>
     </div>
-  </div>
- </div>
-</section>
-
-
-<!-- ============ QUICK PRODUCT NAVIGATION ============ -->
-<section class="quick-nav-section">
- <div class="container">
-  <div class="product-quick-nav">
-   <h3>&#x1F4CB; All Products at a Glance</h3>
-   <div class="pq-nav-list">
-    <a href="#product-1" class="pq-nav-item">
-      <span class="pq-nav-num">1</span>
-      <span class="pq-nav-emoji">🟣</span>
-      <span class="pq-nav-text">180lbs Pilates Bar Band Set</span>
-      <span class="pq-nav-price">$24.68</span>
-    </a>
-    <a href="#product-2" class="pq-nav-item">
-      <span class="pq-nav-num">2</span>
-      <span class="pq-nav-emoji">🔵</span>
-      <span class="pq-nav-text">YOUGLE 11-Piece Resistance Band Set</span>
-      <span class="pq-nav-price">$20.90</span>
-    </a>
-    <a href="#product-3" class="pq-nav-item">
-      <span class="pq-nav-num">3</span>
-      <span class="pq-nav-emoji">🟠</span>
-      <span class="pq-nav-text">300lb Booty Resistance Band</span>
-      <span class="pq-nav-price">$22.53</span>
-    </a>
-    <a href="#product-4" class="pq-nav-item">
-      <span class="pq-nav-num">4</span>
-      <span class="pq-nav-emoji">🟡</span>
-      <span class="pq-nav-text">Complete Band Set with Door Anchor</span>
-      <span class="pq-nav-price">$18.22</span>
-    </a>
-    <a href="#product-5" class="pq-nav-item">
-      <span class="pq-nav-num">5</span>
-      <span class="pq-nav-emoji">🟢</span>
-      <span class="pq-nav-text">4-Piece Elastic Fitness Band Set</span>
-      <span class="pq-nav-price">$3.77</span>
-    </a>
-   </div>
   </div>
  </div>
 </section>
