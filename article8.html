@@ -831,6 +831,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
+  .tips-grid .tip-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+  }
   .tip-card {
     background: var(--white);
     border: 1px solid var(--border);
