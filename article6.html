@@ -831,9 +831,9 @@
 
   .quick-tips-section { padding: 0 0 20px; }
   .tips-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
   .tip-card {
     background: var(--white);
@@ -841,7 +841,6 @@
     border-radius: var(--radius);
     padding: 16px 20px;
     text-align: center;
-    flex: 1 1 280px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .tip-card:hover {
@@ -905,7 +904,7 @@
 
   @media (max-width: 768px) {
     .trust-strip { gap: 16px; }
-    .tips-grid { flex-direction: column; }
+    .tips-grid { grid-template-columns: 1fr; }
   }
 
   </style>
