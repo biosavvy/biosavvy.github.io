@@ -810,9 +810,10 @@
     border-radius: var(--radius);
     padding: 14px 20px;
     margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
   }
   .trust-item {
     display: flex;
@@ -899,7 +900,7 @@
   }
 
   @media (max-width: 768px) {
-    .trust-strip { grid-template-columns: 1fr; }
+    .trust-strip { gap: 16px; }
     .tips-grid { flex-direction: column; }
   }
 
@@ -1048,10 +1049,6 @@
   <div class="trust-item">
    <span class="trust-icon">&#x2B50;</span>
    <span><strong>Zero Sponsors</strong> &mdash; We accept no sponsorship from any brand</span>
-  </div>
-  <div class="trust-item">
-   <span class="trust-icon">&#x1F4B3;</span>
-   <span><strong>Same Price For You</strong> &mdash; Affiliate links never increase your cost</span>
   </div>
  </div>
 </div>
