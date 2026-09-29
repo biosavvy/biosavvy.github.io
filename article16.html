@@ -794,10 +794,17 @@
     margin-bottom: 14px;
   }
   .pq-nav-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
+  }
+  .pq-nav-list .pq-nav-item:last-child:nth-child(3n-1) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 5px);
+    justify-self: center;
+  }
+  .pq-nav-list .pq-nav-item:last-child:nth-child(3n-2) {
+    grid-column: 2;
   }
   .pq-nav-item {
     display: flex;
