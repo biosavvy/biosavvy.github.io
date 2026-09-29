@@ -868,16 +868,48 @@
       var grid = document.querySelector('.reviews .blog-grid');
       var btn = document.getElementById('showMoreReviews');
       if (!grid || !btn) return;
-      var cards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
-      var wrap = btn.closest('.more-wrap');
-      if (cards.length <= INITIAL) { if (wrap) wrap.style.display = 'none'; return; }
+      var allCards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
 
-      cards.forEach(function (c, i) {
+      // Determine which cards are actually visible (not hidden by scheduling)
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var visibleCards = [];
+      var hiddenBySchedule = [];
+      allCards.forEach(function (c) {
+        if (c.classList.contains('blog-card-scheduled')) {
+          var dateStr = c.getAttribute('data-schedule-date');
+          if (dateStr) {
+            var pubDate = new Date(dateStr + 'T00:00:00');
+            if (today >= pubDate) {
+              visibleCards.push(c);
+            } else {
+              hiddenBySchedule.push(c);
+            }
+          } else {
+            visibleCards.push(c);
+          }
+        } else {
+          visibleCards.push(c);
+        }
+      });
+
+      var wrap = btn.closest('.more-wrap');
+      if (visibleCards.length <= INITIAL) {
+        if (wrap) wrap.style.display = 'none';
+        return;
+      }
+
+      // Hide visible cards beyond INITIAL (only among visible ones)
+      visibleCards.forEach(function (c, i) {
         if (i >= INITIAL) c.classList.add('card-hidden');
       });
 
+      // Update button text with actual remaining count
+      var remaining = visibleCards.length - INITIAL;
+      btn.textContent = 'See ' + remaining + ' more review' + (remaining !== 1 ? 's' : '');
+
       btn.addEventListener('click', function () {
-        cards.forEach(function (c) { c.classList.remove('card-hidden'); });
+        visibleCards.forEach(function (c) { c.classList.remove('card-hidden'); });
         if (wrap) wrap.style.display = 'none';
       });
     })();
