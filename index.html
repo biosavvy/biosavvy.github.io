@@ -804,7 +804,7 @@
       </div>
 
       <div class="more-wrap">
-        <button type="button" class="btn-more" id="showMoreReviews">See 6 more reviews</button>
+        <button type="button" class="btn-more" id="showMoreReviews">See more reviews</button>
       </div>
     </div>
   </section>
@@ -903,10 +903,6 @@
       visibleCards.forEach(function (c, i) {
         if (i >= INITIAL) c.classList.add('card-hidden');
       });
-
-      // Update button text with actual remaining count
-      var remaining = visibleCards.length - INITIAL;
-      btn.textContent = 'See ' + remaining + ' more review' + (remaining !== 1 ? 's' : '');
 
       btn.addEventListener('click', function () {
         visibleCards.forEach(function (c) { c.classList.remove('card-hidden'); });
