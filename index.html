@@ -195,6 +195,7 @@
     }
 
     .blog-card {
+      position: relative;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -209,6 +210,14 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       transform: translateY(-2px);
       border-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .blog-card .thumb::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
     }
 
     .blog-card .thumb {
@@ -325,9 +334,6 @@
       transition: background 0.2s, color 0.2s;
     }
     .btn-more:hover { background: var(--primary); color: #fff; }
-    .blog-card.card-hidden { display: none !important; }
-    .blog-card.blog-card-scheduled { display: none !important; }
-    .blog-card.blog-card-scheduled.is-visible { display: flex !important; }
 
     /* ---------- CTA ---------- */
     .cta { text-align: center; padding: 64px 20px; max-width: 640px; margin: 0 auto; }
@@ -374,7 +380,7 @@
     /* ---------- Print ---------- */
     @media print {
       .topnav, .hero-actions, .cta, .blog-card .read-link { display: none !important; }
-      .blog-card.card-hidden { display: block !important; }
+      .blog-card.card-hidden { display: flex !important; }
       .more-wrap { display: none !important; }
       body { background: #fff; }
       .reviews { background: #fff; padding: 20px 0; }
@@ -713,7 +719,7 @@
       </div>
 
       <div class="more-wrap">
-        <button type="button" class="btn-more" id="showMoreReviews">See all 16 reviews</button>
+        <button type="button" class="btn-more" id="showMoreReviews">See 6 more reviews</button>
       </div>
     </div>
   </section>
@@ -773,7 +779,7 @@
 
   <script>
     (function () {
-      var INITIAL = 6;
+      var INITIAL = 10;
       var grid = document.querySelector('.reviews .blog-grid');
       var btn = document.getElementById('showMoreReviews');
       if (!grid || !btn) return;
@@ -790,6 +796,17 @@
         if (wrap) wrap.style.display = 'none';
       });
     })();
+
+    // Card click navigation (backup)
+    document.querySelectorAll('.blog-card').forEach(function(card) {
+      var link = card.querySelector('.thumb[href]');
+      if (link) {
+        card.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') return; // let actual links work
+          window.location.href = link.href;
+        });
+      }
+    });
 
     // Scheduled article reveal
     (function () {
