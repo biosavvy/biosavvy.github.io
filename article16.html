@@ -46,7 +46,7 @@
    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
    color: var(--text);
    background: var(--bg);
-   line-height: 1.65;
+   line-height: 1.55;
    -webkit-font-smoothing: antialiased;
   }
 
@@ -97,7 +97,7 @@
   .hero {
    background: linear-gradient(135deg, #042F2E 0%, #0D9488 45%, #0F766E 100%);
    color: var(--white);
-   padding: 70px 0 60px;
+   padding: 45px 0 35px;
    position: relative;
    overflow: hidden;
   }
@@ -172,13 +172,13 @@
    display: inline-block;
   }
   .intro {
-   padding: 50px 0 30px;
+   padding: 30px 0 20px;
   }
   .intro p {
    font-size: 1.08rem;
    color: var(--text-light);
    max-width: 780px;
-   margin-bottom: 16px;
+   margin-bottom: 10px;
   }
   .intro strong { color: var(--text); }
   .comparison-section {
@@ -297,14 +297,14 @@
    vertical-align: middle;
   }
   .products-section {
-   padding: 30px 0 60px;
+   padding: 20px 0 40px;
   }
   .product-card {
    background: var(--white);
    border-radius: var(--radius);
    overflow: hidden;
    box-shadow: var(--shadow);
-   margin-bottom: 32px;
+   margin-bottom: 22px;
    border: 1px solid var(--border);
    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -321,7 +321,7 @@
 
   .card-header {
    color: var(--white);
-   padding: 24px 28px;
+   padding: 18px 22px;
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
@@ -365,7 +365,7 @@
    opacity: 0.85;
   }
   .card-badge-row {
-   padding: 0 28px;
+   padding: 0 22px;
    margin-top: -14px;
    margin-bottom: 14px;
    position: relative;
@@ -527,7 +527,7 @@
    transform: translateY(-1px);
   }
   .science-section {
-   padding: 20px 0 50px;
+   padding: 16px 0 35px;
   }
   .science-box {
    background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
@@ -621,7 +621,7 @@
    line-height: 1.6;
   }
   .faq-section {
-   padding: 20px 0 60px;
+   padding: 16px 0 40px;
   }
   .faq-grid {
    display: grid;
@@ -759,9 +759,9 @@
    margin-bottom: 20px;
   }
   @media (max-width: 640px) {
-   .hero { padding: 50px 0 40px; }
+   .hero { padding: 35px 0 30px; }
    .card-header { padding: 20px 20px; }
-   .card-body { padding: 10px 20px 24px; }
+   .card-body { padding: 8px 20px 18px; }
    .card-badge-row { padding: 0 20px; }
    .card-emoji { font-size: 2rem; }
    .card-header h2 { font-size: 1.2rem; }
@@ -787,24 +787,23 @@
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px 28px;
-    margin-bottom: 32px;
-    display: flex;
-    gap: 28px;
-    align-items: center;
-    flex-wrap: wrap;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
   }
   .trust-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
+    gap: 8px;
+    font-size: 0.85rem;
     color: var(--text-light);
     font-weight: 500;
   }
   .trust-icon { font-size: 1.5rem; }
 
-  .quick-tips-section { padding: 0 0 30px; }
+  .quick-tips-section { padding: 0 0 20px; }
   .tips-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -878,7 +877,7 @@
   }
 
   @media (max-width: 768px) {
-    .trust-strip { flex-direction: column; gap: 12px; }
+    .trust-strip { grid-template-columns: 1fr; }
     .tips-grid { grid-template-columns: 1fr; }
   }
 
@@ -1026,7 +1025,11 @@
   </div>
   <div class="trust-item">
    <span class="trust-icon">&#x2B50;</span>
-   <span><strong>Independently Rated</strong> &mdash; No brand sponsorships influence our picks</span>
+   <span><strong>Zero Sponsors</strong> &mdash; We accept no sponsorship from any brand</span>
+  </div>
+  <div class="trust-item">
+   <span class="trust-icon">&#x1F4B3;</span>
+   <span><strong>Same Price For You</strong> &mdash; Affiliate links never increase your cost</span>
   </div>
  </div>
 </div>
