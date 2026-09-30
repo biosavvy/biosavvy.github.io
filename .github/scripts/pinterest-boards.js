@@ -30,98 +30,133 @@ const BOARDS = [
 
   const page = await context.newPage();
 
-  // === STEP 1: Login via homepage modal ===
-  console.log('Step 1: Navigate to homepage and login...');
-  await page.goto('https://www.pinterest.com/', { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForTimeout(3000);
-  await page.screenshot({ path: '01-homepage.png', fullPage: false });
+  // === STEP 1: Login ===
+  console.log('Step 1: Navigate to login page...');
+  await page.goto('https://www.pinterest.com/login/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForTimeout(5000);
+  await page.screenshot({ path: '01-login-page.png', fullPage: false });
 
-  // Click "I already have an account" or "Log in" button
-  let loginClicked = false;
-  try {
-    const alreadyHaveAccountBtn = await page.$('button:has-text("I already have an account")');
-    if (alreadyHaveAccountBtn) {
-      await alreadyHaveAccountBtn.click();
-      console.log('Clicked "I already have an account"');
-      loginClicked = true;
-    }
-  } catch (e) { console.log('Error clicking already have account:', e.message); }
-
-  if (!loginClicked) {
+  // Close any modals first (signup modal, cookie banner, etc.)
+  console.log('Checking for modals/popups...');
+  const closeButtons = await page.$$('button[aria-label="Close"], button[aria-label="close"], [data-test-id="close-button"], .modalClose, button:has-text("×"), button:has-text("✕")');
+  for (const btn of closeButtons) {
     try {
-      const loginBtn = await page.$('button:has-text("Log in")');
-      if (loginBtn) {
-        await loginBtn.click();
-        console.log('Clicked "Log in"');
-        loginClicked = true;
+      if (await btn.isVisible()) {
+        await btn.click();
+        console.log('Closed a modal/popup');
+        await page.waitForTimeout(500);
       }
-    } catch (e) { console.log('Error clicking log in:', e.message); }
+    } catch (e) {}
   }
 
-  if (!loginClicked) {
-    console.log('ERROR: Could not find login button');
-    await browser.close();
-    process.exit(1);
+  await page.screenshot({ path: '02-after-close-modals.png', fullPage: false });
+
+  // Fill email
+  const emailSelectors = ['input[name="id"]', 'input[type="email"]', 'input[placeholder*="Email"]', 'input[placeholder*="email"]'];
+  let emailInput = null;
+  for (const sel of emailSelectors) {
+    try {
+      emailInput = await page.$(sel);
+      if (emailInput && await emailInput.isVisible()) {
+        console.log('Email input found via:', sel);
+        break;
+      }
+    } catch (e) { emailInput = null; }
   }
 
-  await page.waitForTimeout(2000);
-  await page.screenshot({ path: '02-login-modal.png', fullPage: false });
-
-  // Fill email and password in modal
-  const emailInput = await page.$('input[placeholder="Email"], input[name="email"], input[type="email"]');
-  const passwordInput = await page.$('input[placeholder="Password"], input[name="password"], input[type="password"]');
-
-  if (!emailInput || !passwordInput) {
-    console.log('ERROR: Could not find email/password inputs');
-    console.log('Page URL:', page.url());
-    await page.screenshot({ path: '02-error-no-inputs.png', fullPage: false });
-    const html = await page.content();
-    require('fs').writeFileSync('debug-login.html', html);
+  if (!emailInput) {
+    console.log('ERROR: Could not find email input');
     await browser.close();
     process.exit(1);
   }
 
   await emailInput.fill(process.env.PIN_EMAIL);
-  await passwordInput.fill(process.env.PIN_PASSWORD);
-  console.log('Email and password filled');
+  console.log('Email filled:', process.env.PIN_EMAIL);
 
-  // Click Log in button in modal
-  const submitBtn = await page.$('button:has-text("Log in")');
+  // Fill password
+  const pwdSelectors = ['input[name="password"]', 'input[type="password"]', 'input[placeholder*="Password"]'];
+  let pwdInput = null;
+  for (const sel of pwdSelectors) {
+    try {
+      pwdInput = await page.$(sel);
+      if (pwdInput && await pwdInput.isVisible()) {
+        console.log('Password input found via:', sel);
+        break;
+      }
+    } catch (e) { pwdInput = null; }
+  }
+
+  if (!pwdInput) {
+    console.log('ERROR: Could not find password input');
+    await page.screenshot({ path: '02-error-no-pwd.png', fullPage: false });
+    await browser.close();
+    process.exit(1);
+  }
+
+  await pwdInput.fill(process.env.PIN_PASSWORD);
+  console.log('Password filled');
+
+  // Click submit button
+  let submitBtn = null;
+  const btnSelectors = ['button[type="submit"]', '[data-testid="signup-login-button"]', '[data-test-id="register-password-submit"]', 'button:has-text("Log in")', 'button:has-text("Log in")'];
+  for (const sel of btnSelectors) {
+    try {
+      submitBtn = await page.$(sel);
+      if (submitBtn && await submitBtn.isVisible()) {
+        console.log('Submit button found via:', sel);
+        break;
+      }
+    } catch (e) { submitBtn = null; }
+  }
+
   if (submitBtn) {
     await submitBtn.click();
-    console.log('Clicked Log in button');
+    console.log('Submit button clicked');
   } else {
     await page.keyboard.press('Enter');
     console.log('Pressed Enter to submit');
   }
 
-  // Wait for login to complete
-  console.log('Waiting for login...');
-  await page.waitForTimeout(8000);
-  await page.screenshot({ path: '03-after-login.png', fullPage: false });
-  console.log('URL after login:', page.url());
+  // Wait for login to complete - check URL changes
+  console.log('Waiting for login to complete...');
+  let loginSuccess = false;
 
-  // Check if still on login page
-  const isOnLogin = page.url().includes('/login') || await page.$('input[placeholder="Email"]') !== null;
-  if (isOnLogin) {
-    console.log('WARNING: Still on login page. Login may have failed.');
+  // Wait up to 20 seconds for navigation away from login page
+  for (let i = 0; i < 20; i++) {
+    await page.waitForTimeout(1000);
+    const url = page.url();
+    if (!url.includes('/login') && !url.includes('/signup')) {
+      console.log('Navigation detected! URL:', url);
+      loginSuccess = true;
+      break;
+    }
+    if (i % 5 === 0) {
+      console.log(`Still waiting... (${i}s) URL:`, url);
+    }
+  }
+
+  await page.waitForTimeout(3000);
+  await page.screenshot({ path: '03-after-login.png', fullPage: false });
+  console.log('Final URL:', page.url());
+
+  if (!loginSuccess) {
     // Check for error messages
     const errorMsg = await page.$eval('[data-test-id="toast-primary-text"], .error, [class*="error"]', el => el.textContent).catch(() => null);
     if (errorMsg) console.log('Error message:', errorMsg);
 
-    // Try CAPTCHA check
-    const hasCaptcha = await page.$('.g-recaptcha, [data-recaptcha], iframe[src*="recaptcha"]').catch(() => null);
+    // Check for CAPTCHA
+    const hasCaptcha = await page.$('.g-recaptcha, [data-recaptcha], iframe[src*="recaptcha"], iframe[src*="hcaptcha"]').catch(() => null);
     if (hasCaptcha) console.log('CAPTCHA detected!');
 
-    await page.screenshot({ path: '03-login-failed.png', fullPage: false });
+    console.log('Login failed!');
     await browser.close();
     process.exit(1);
   }
 
   console.log('Login successful!');
 
-  // === STEP 2: Navigate to business hub to verify ===
-  console.log('\nStep 2: Check business hub...');
+  // === STEP 2: Navigate to business hub ===
+  console.log('\nStep 2: Navigate to business hub...');
   await page.goto('https://www.pinterest.com/business/hub/', { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(5000);
   await page.screenshot({ path: '04-business-hub.png', fullPage: false });
@@ -134,26 +169,21 @@ const BOARDS = [
     console.log(`\n--- Creating: "${board.name}" ---`);
 
     try {
-      // Navigate to board creation URL
       await page.goto('https://www.pinterest.com/board/create/', {
         waitUntil: 'domcontentloaded',
         timeout: 30000
       });
       await page.waitForTimeout(5000);
-      await page.screenshot({ path: `05-create-${board.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}-before.png`, fullPage: false });
 
-      // Check we're on the create page, not login
+      // Check if login session expired
       const currentUrl = page.url();
-      if (currentUrl.includes('/login') || currentUrl.includes('pinterest.com/')) {
-        // Check if login modal appeared
-        const loginModal = await page.$('text=Welcome to Pinterest');
-        if (loginModal) {
-          console.log('Login session expired! Re-logging in...');
-          await page.screenshot({ path: '05-login-expired.png', fullPage: false });
-          await browser.close();
-          process.exit(1);
-        }
+      if (currentUrl.includes('/login')) {
+        console.log('ERROR: Login session expired at board creation');
+        await page.screenshot({ path: `05-error-${board.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}.png`, fullPage: false });
+        break;
       }
+
+      await page.screenshot({ path: `05-create-${board.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}-before.png`, fullPage: false });
 
       // Find and fill name input
       const inputs = await page.$$eval('input, textarea', els =>
@@ -162,13 +192,12 @@ const BOARDS = [
           placeholder: e.placeholder || '',
           name: e.name || '',
           id: e.id || '',
-          tagName: e.tagName,
           visible: e.offsetParent !== null || e.getBoundingClientRect().height > 0
         }))
       );
       console.log('Inputs:', JSON.stringify(inputs));
 
-      // Fill name
+      // Fill name - try multiple selectors
       let nameFilled = false;
       const nameSelectors = [
         'input[type="text"]:not([name="searchBoxInput"])',
@@ -176,7 +205,6 @@ const BOARDS = [
         'input[placeholder*="name"]',
         'input[placeholder*="board"]',
         'input[placeholder*="Board"]',
-        'input[name="boardName"]',
       ];
 
       for (const sel of nameSelectors) {
