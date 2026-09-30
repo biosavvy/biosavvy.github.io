@@ -1,0 +1,33 @@
+name: SEO Auto-Indexer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'sitemap*.xml'
+  schedule:
+    # Ping search engines every Sunday at 8:00 AM EST
+    - cron: '7 12 * * 0'
+  workflow_dispatch:
+
+jobs:
+  seo-ping:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Ping search engines
+      env:
+        GOOGLE_INDEXING_CREDENTIALS: ${{ secrets.GOOGLE_INDEXING_CREDENTIALS }}
+      run: python .github/scripts/seo-indexer.py
