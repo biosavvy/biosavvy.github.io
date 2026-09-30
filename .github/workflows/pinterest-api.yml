@@ -1,0 +1,43 @@
+name: Pinterest API Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'boards-and-pins'
+        type: choice
+        options:
+          - boards-only
+          - pins-only
+          - boards-and-pins
+          - test-token
+  schedule:
+    # Run every Monday at 9:00 AM EST (check for new content)
+    - cron: '3 13 * * 1'
+
+jobs:
+  pinterest-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Run Pinterest automation
+      env:
+        PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+        PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
+        PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
+        PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+        ACTION: ${{ github.event.inputs.action || 'boards-and-pins' }}
+      run: python .github/scripts/pinterest-api.py
