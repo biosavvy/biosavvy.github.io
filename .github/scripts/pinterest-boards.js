@@ -1,5 +1,4 @@
 const { chromium } = require('playwright');
-const fs = require('fs');
 
 const BOARDS = [
   { name: 'Pain Relief & Recovery', description: 'Science-backed pain relief devices: back stretchers, TENS units, red light therapy, posture correctors & more' },
@@ -8,6 +7,134 @@ const BOARDS = [
   { name: 'Home Health & Wellness', description: 'Air quality monitors, wellness products & healthy home essentials' },
   { name: 'Healthy Kitchen', description: 'Portable blenders, juicers & nutrition tools for healthy living' },
 ];
+
+async function login(page) {
+  console.log('Logging in...');
+  await page.goto('https://www.pinterest.com/login/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForTimeout(5000);
+
+  const emailInput = await page.$('input[type="email"]');
+  await emailInput.fill(process.env.PIN_EMAIL);
+  const pwdInput = await page.$('input[type="password"]');
+  await pwdInput.fill(process.env.PIN_PASSWORD);
+  await page.click('button[type="submit"]');
+
+  await page.waitForURL('**/homefeed**', { timeout: 20000 }).catch(() =>
+    page.waitForURL('**/business/**', { timeout: 10000 }).catch(() => {})
+  );
+  await page.waitForTimeout(3000);
+  console.log('Logged in. URL:', page.url());
+}
+
+async function createBoardViaNav(page, board) {
+  // Navigate to the "Create" page via URL
+  console.log(`Creating board: "${board.name}"`);
+
+  // Try going directly to board create URL
+  await page.goto('https://www.pinterest.com/board/create/', {
+    waitUntil: 'domcontentloaded',
+    timeout: 30000
+  }).catch(() => console.log('Direct URL failed, trying nav...'));
+
+  await page.waitForTimeout(3000);
+  await page.screenshot({ path: `pinterest-create-board-page.png`, fullPage: false });
+
+  // Look for name input
+  const nameInput = await page.$('input[placeholder*="Name"]')
+    || await page.$('input[placeholder*="Board name"]')
+    || await page.$('input[type="text"]')
+    || (await page.$$('input')).find(i => true);
+
+  if (nameInput) {
+    // Find the right input (first text input that's visible)
+    const inputs = await page.$$('input[type="text"], input[placeholder], input:not([type])');
+    let targetInput = null;
+    for (const inp of inputs) {
+      const isVisible = await inp.isVisible().catch(() => false);
+      if (isVisible) { targetInput = inp; break; }
+    }
+    if (!targetInput) targetInput = inputs[0];
+
+    await targetInput.fill(board.name);
+    console.log('  Name filled');
+  }
+
+  // Look for description textarea
+  const descInput = await page.$('textarea');
+  if (descInput) {
+    await descInput.fill(board.description);
+    console.log('  Description filled');
+  }
+
+  // Look for privacy toggle - set to public
+  const privacyToggle = await page.$('[data-test-id="keep-board-secret"]');
+  if (privacyToggle) {
+    const isChecked = await privacyToggle.isChecked().catch(() => false);
+    if (isChecked) {
+      await privacyToggle.click();
+      console.log('  Set to public');
+    }
+  }
+
+  // Click Create/Save
+  const createBtn = await page.$('button:has-text("Create")')
+    || await page.$('button:has-text("Next")')
+    || await page.$('[data-test-id="board-creator-save-button"]');
+
+  if (createBtn) {
+    await createBtn.click();
+    console.log('  Create button clicked');
+    await page.waitForTimeout(3000);
+  }
+
+  await page.screenshot({ path: `pinterest-board-done-${board.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}.png`, fullPage: false });
+}
+
+async function createBoardViaPlusButton(page, board) {
+  // Go to homefeed and use the + button
+  await page.goto('https://www.pinterest.com/homefeed/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForTimeout(3000);
+
+  // Look for + button (create button in top nav)
+  const plusBtn = await page.$('[data-test-id="create-button"]')
+    || await page.$('button[aria-label*="Create"]')
+    || await page.$('div[aria-label*="Create"]');
+
+  if (plusBtn) {
+    await plusBtn.click();
+    await page.waitForTimeout(2000);
+
+    // Look for "Board" option in dropdown
+    const boardOption = await page.$('text=Board')
+      || await page.$('[data-test-id="board-creator"]');
+    if (boardOption) {
+      await boardOption.click();
+      await page.waitForTimeout(2000);
+    }
+  }
+
+  // Fill name
+  const nameInput = await page.$('input[placeholder*="Name"]') || await page.$('input[type="text"]');
+  if (nameInput) {
+    await nameInput.fill(board.name);
+    console.log('  Name filled');
+  }
+
+  // Fill description
+  const descInput = await page.$('textarea');
+  if (descInput) {
+    await descInput.fill(board.description);
+    console.log('  Description filled');
+  }
+
+  // Create
+  const createBtn = await page.$('button:has-text("Create")');
+  if (createBtn) {
+    await createBtn.click();
+    console.log('  Created');
+    await page.waitForTimeout(3000);
+  }
+}
 
 (async () => {
   const browser = await chromium.launch({
@@ -32,113 +159,46 @@ const BOARDS = [
   const page = await context.newPage();
 
   // Login
-  console.log('=== Logging in ===');
-  await page.goto('https://www.pinterest.com/login/', { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForTimeout(5000);
+  await login(page);
 
-  const emailInput = await page.$('input[type="email"]');
-  await emailInput.fill(process.env.PIN_EMAIL);
-  const pwdInput = await page.$('input[type="password"]');
-  await pwdInput.fill(process.env.PIN_PASSWORD);
-  await page.$('button[type="submit"]').then(b => b.click());
-
-  await page.waitForURL('**/homefeed**', { timeout: 20000 }).catch(() =>
-    page.waitForURL('**/business/**', { timeout: 10000 }).catch(() => {})
-  );
+  // First, try to explore the page structure
+  console.log('\n=== Exploring page structure ===');
+  await page.goto('https://www.pinterest.com/homefeed/', { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(3000);
-  console.log('Logged in. URL:', page.url());
+  await page.screenshot({ path: 'pinterest-homefeed.png', fullPage: false });
 
-  // Navigate to boards page
-  console.log('=== Creating Boards ===');
-  await page.goto('https://www.pinterest.com/ideas/boards/', { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForTimeout(3000);
+  // Try to find all interactive elements
+  const snapshot = await page.accessibility.snapshot();
+  const createRelated = [];
+  function findCreate(node) {
+    if (node.name && (node.name.toLowerCase().includes('create') || node.name.includes('+'))) {
+      createRelated.push({ name: node.name, role: node.role });
+    }
+    if (node.children) node.children.forEach(findCreate);
+  }
+  if (snapshot) findCreate(snapshot);
+  console.log('Create-related elements:', JSON.stringify(createRelated));
 
-  // Try to find "Create board" button
-  // Pinterest board creation: go to profile → Boards → Create
+  // Create boards
+  console.log('\n=== Creating Boards ===');
+  for (const board of BOARDS) {
+    try {
+      await createBoardViaNav(page, board);
+    } catch (e) {
+      console.log(`Error with ${board.name}: ${e.message}`);
+      // Retry with alternative method
+      try {
+        await createBoardViaPlusButton(page, board);
+      } catch (e2) {
+        console.log(`Alternative also failed: ${e2.message}`);
+      }
+    }
+  }
+
+  console.log('\n=== Final screenshot ===');
   await page.goto('https://www.pinterest.com/biosavvy/', { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(3000);
-  await page.screenshot({ path: 'pinterest-profile.png', fullPage: false });
-  console.log('Profile screenshot saved');
-
-  // Click "Boards" tab
-  const boardsTab = await page.$('text=Boards') || await page.$('[data-test-id="boards-tab"]');
-  if (boardsTab) {
-    await boardsTab.click();
-    await page.waitForTimeout(2000);
-    console.log('Clicked Boards tab');
-  }
-
-  // Create each board
-  for (const board of BOARDS) {
-    console.log(`\n--- Creating board: "${board.name}" ---`);
-
-    // Look for "Create board" button
-    let createBtn = await page.$('button:has-text("Create board")')
-      || await page.$('[data-test-id="create-board-button"]')
-      || await page.$('div:has-text("Create board")');
-
-    if (!createBtn) {
-      // Try the + button
-      createBtn = await page.$('[data-test-id="board-creator"]')
-        || await page.$('button:has-text("+")')
-        || await page.$('a:has-text("Create board")');
-    }
-
-    if (createBtn) {
-      await createBtn.click();
-      await page.waitForTimeout(2000);
-      console.log('Clicked create board button');
-    } else {
-      console.log('Create board button not found, trying alternative...');
-      // Try navigating directly to create board
-      await page.goto('https://www.pinterest.com/board/create/', { waitUntil: 'domcontentloaded', timeout: 30000 });
-      await page.waitForTimeout(3000);
-    }
-
-    // Fill board name
-    const nameInput = await page.$('input[placeholder*="Name"]')
-      || await page.$('input[placeholder*="name"]')
-      || await page.$('input[name="boardName"]')
-      || await page.$('input[data-test-id="board-name-input"]');
-
-    if (nameInput) {
-      await nameInput.fill(board.name);
-      console.log('Board name filled');
-    } else {
-      console.log('Name input not found');
-      await page.screenshot({ path: `pinterest-error-board-name.png` });
-      continue;
-    }
-
-    // Fill description if there's a description field
-    const descInput = await page.$('textarea[placeholder*="description"]')
-      || await page.$('textarea[placeholder*="Description"]')
-      || await page.$('textarea[data-test-id="board-description-input"]');
-
-    if (descInput) {
-      await descInput.fill(board.description);
-      console.log('Description filled');
-    }
-
-    // Save/Create the board
-    const saveBtn = await page.$('button:has-text("Create")')
-      || await page.$('button:has-text("Save")')
-      || await page.$('button[data-test-id="save-board-button"]')
-      || await page.$('button[type="submit"]');
-
-    if (saveBtn) {
-      await saveBtn.click();
-      console.log('Board saved!');
-      await page.waitForTimeout(3000);
-    } else {
-      console.log('Save button not found');
-    }
-
-    await page.screenshot({ path: `pinterest-board-${board.name.replace(/\s+/g, '-').toLowerCase()}.png`, fullPage: false });
-  }
-
-  console.log('\n=== All boards done ===');
-  await page.screenshot({ path: 'pinterest-boards-final.png', fullPage: false });
+  await page.screenshot({ path: 'pinterest-profile-final.png', fullPage: false });
 
   await browser.close();
   console.log('Done');
