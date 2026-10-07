@@ -18,7 +18,7 @@ from datetime import datetime
 
 SITE_URL = "https://biosavvy.github.io"
 SITEMAP_URL = f"{SITE_URL}/sitemap.xml"
-SITEMAP_PAGES_URL = f"{SITE_URL}/sitemap-pages.xml"
+INDEXNOW_KEY = "67c5b88497f170955b7dc1be8e3ea363"
 
 
 def ping_google():
@@ -59,22 +59,9 @@ def submit_indexnow():
     """Submit URLs via IndexNow protocol (instant indexing for Bing + Yandex)."""
     print("\n[IndexNow] Submitting URLs for instant indexing...")
 
-    # IndexNow requires an API key - generate and save
-    indexnow_key_file = ".github/indexnow-key.txt"
-    if os.path.exists(indexnow_key_file):
-        with open(indexnow_key_file) as f:
-            api_key = f.read().strip()
-    else:
-        # Generate a random key
-        import hashlib
-        api_key = hashlib.md5(f"biosavvy-{datetime.now().isoformat()}".encode()).hexdigest()
-        os.makedirs(os.path.dirname(indexnow_key_file), exist_ok=True)
-        with open(indexnow_key_file, "w") as f:
-            f.write(api_key)
-        # Also need to create the key file at root for verification
-        with open("indexnow-key.txt", "w") as f:
-            f.write(api_key)
-        print(f"  Generated new IndexNow key: {api_key[:8]}...")
+    # Use the existing IndexNow key from the root verification file
+    api_key = INDEXNOW_KEY
+    print(f"  Using IndexNow key: {api_key[:8]}...")
 
     # Collect all page URLs
     urls = [SITE_URL + "/"]
