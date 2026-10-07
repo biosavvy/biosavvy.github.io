@@ -292,10 +292,7 @@
       margin-left: auto;
     }
 
-    .blog-card.card-hidden { display: none !important; }
-    .blog-card.blog-card-scheduled { display: none !important; }
-    .blog-card.blog-card-scheduled.is-visible { display: flex !important; }
-
+            
     @media (max-width: 720px) {
       .blog-grid {
         grid-template-columns: 1fr;
@@ -324,16 +321,6 @@
     }
     .step h3 { font-size: 16px; margin-bottom: 6px; }
     .step p { font-size: 13.5px; color: var(--text-light); }
-
-    /* ---------- Reviews: load more ---------- */
-    .more-wrap { text-align: center; margin-top: 30px; }
-    .btn-more {
-      display: inline-block; background: var(--white); color: var(--primary);
-      border: 1.5px solid var(--primary); padding: 12px 30px; border-radius: 8px;
-      font-size: 14.5px; font-weight: 600; cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-more:hover { background: var(--primary); color: #fff; }
 
     /* ---------- CTA ---------- */
     .cta { text-align: center; padding: 64px 20px; max-width: 640px; margin: 0 auto; }
@@ -380,8 +367,6 @@
     /* ---------- Print ---------- */
     @media print {
       .topnav, .hero-actions, .cta, .blog-card .read-link { display: none !important; }
-      .blog-card.card-hidden { display: flex !important; }
-      .more-wrap { display: none !important; }
       body { background: #fff; }
       .reviews { background: #fff; padding: 20px 0; }
       .blog-card, .cat-card { break-inside: avoid; box-shadow: none; }
@@ -495,7 +480,7 @@
       </div>
 
       <div class="blog-grid">
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-13">
+        <article class="blog-card" data-schedule-date="2026-10-13">
           <a href="article23.html" class="thumb" style="background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);" aria-label="Read Best Air Quality Detectors in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F32C;
           </a>
@@ -509,7 +494,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-10">
+        <article class="blog-card" data-schedule-date="2026-10-10">
           <a href="article22.html" class="thumb" style="background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);" aria-label="Read Best Portable Juicers in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F964;
           </a>
@@ -523,7 +508,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-07">
+        <article class="blog-card" data-schedule-date="2026-10-07">
           <a href="article21.html" class="thumb" style="background: linear-gradient(135deg, #D97706 0%, #B45309 100%);" aria-label="Read Best Foot Acupressure Mats in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F9B6;
           </a>
@@ -537,7 +522,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-04">
+        <article class="blog-card" data-schedule-date="2026-10-04">
           <a href="article20.html" class="thumb" style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);" aria-label="Read Best Sleep Aid Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F634;
           </a>
@@ -551,7 +536,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-02">
+        <article class="blog-card" data-schedule-date="2026-10-02">
           <a href="article19.html" class="thumb" style="background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);" aria-label="Read Best TENS &amp; EMS Muscle Stimulators in 2026: Expert Reviews &amp; Buying Guide">
             &#x26A1;
           </a>
@@ -565,7 +550,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
+        <article class="blog-card" data-schedule-date="2026-09-30">
           <a href="article18.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" aria-label="Read Best Back Stretchers in 2026: Expert Reviews & Buying Guide">
             &#x1F9D8;
           </a>
@@ -579,7 +564,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
+        <article class="blog-card" data-schedule-date="2026-09-30">
           <a href="article17.html" class="thumb" style="background: linear-gradient(135deg, #991B1B 0%, #DC2626 100%);" aria-label="Read Best Infrared Therapy Mattresses in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F534;
           </a>
@@ -593,7 +578,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-29">
+        <article class="blog-card" data-schedule-date="2026-09-29">
           <a href="article16.html" class="thumb" style="background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);" aria-label="Read Best Oral Irrigators in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F4A7;
           </a>
@@ -607,7 +592,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-25">
+        <article class="blog-card" data-schedule-date="2026-09-25">
           <a href="article11.html" class="thumb" style="background: linear-gradient(135deg, #6366F1 0%, #A78BFA 100%);" aria-label="Read Best Pure Titanium Thermos Cups in 2026: Tested &amp; Ranked">
             &#x1F964;
           </a>
@@ -621,7 +606,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-25">
+        <article class="blog-card" data-schedule-date="2026-09-25">
           <a href="article10.html" class="thumb" style="background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);" aria-label="Read Best Neck &amp; Shoulder Massagers in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F486;
           </a>
@@ -635,7 +620,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-22">
+        <article class="blog-card" data-schedule-date="2026-09-22">
           <a href="article15.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);" aria-label="Read Best Smart Posture Correctors in 2026: Tested &amp; Ranked">
             &#x1F9CD;
           </a>
@@ -649,7 +634,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-22">
+        <article class="blog-card" data-schedule-date="2026-09-22">
           <a href="article9.html" class="thumb" style="background: linear-gradient(135deg, #65A30D 0%, #A3E635 100%);" aria-label="Read Best Herbal Foot Bath Products in 2026: Tested &amp; Ranked">
             &#x1F33F;
           </a>
@@ -663,7 +648,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-22">
+        <article class="blog-card" data-schedule-date="2026-09-22">
           <a href="article8.html" class="thumb" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);" aria-label="Read Best Budget Smart Watches in 2026: Expert Reviews &amp; Buying Guide">
             &#x231A;
           </a>
@@ -677,7 +662,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-18">
+        <article class="blog-card" data-schedule-date="2026-09-18">
           <a href="article14.html" class="thumb" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);" aria-label="Read Best Infrared Sauna Blankets in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F9D6;
           </a>
@@ -691,7 +676,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-18">
+        <article class="blog-card" data-schedule-date="2026-09-18">
           <a href="article7.html" class="thumb" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);" aria-label="Read Best Electric Mixing Cups &amp; Shakers in 2026: Tested &amp; Ranked">
             &#x1F964;
           </a>
@@ -705,7 +690,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-18">
+        <article class="blog-card" data-schedule-date="2026-09-18">
           <a href="article6.html" class="thumb" style="background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);" aria-label="Read Best Electric Foot Bath Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F6C1;
           </a>
@@ -719,7 +704,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-15">
+        <article class="blog-card" data-schedule-date="2026-09-15">
           <a href="article13.html" class="thumb" style="background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);" aria-label="Read Best Eye Massagers in 2026: Tested &amp; Ranked">
             &#x1F441;&#xFE0F;
           </a>
@@ -733,7 +718,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-15">
+        <article class="blog-card" data-schedule-date="2026-09-15">
           <a href="article4.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #6EE7B7 100%);" aria-label="Read Best Yoga Mats in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F9D8;
           </a>
@@ -747,7 +732,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-11">
+        <article class="blog-card" data-schedule-date="2026-09-11">
           <a href="article12.html" class="thumb" style="background: linear-gradient(135deg, #DC2626 0%, #F472B6 100%);" aria-label="Read Best Red Light Therapy Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F534;
           </a>
@@ -761,7 +746,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-11">
+        <article class="blog-card" data-schedule-date="2026-09-11">
           <a href="article3.html" class="thumb" style="background: linear-gradient(135deg, #9333EA 0%, #EC4899 100%);" aria-label="Read Best Resistance Bands in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F4AA;
           </a>
@@ -775,7 +760,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-11">
+        <article class="blog-card" data-schedule-date="2026-09-11">
           <a href="article2.html" class="thumb" style="background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);" aria-label="Read Best Smart Body Scales in 2026: Tested &amp; Ranked">
             &#x2696;&#xFE0F;
           </a>
@@ -789,7 +774,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-08">
+        <article class="blog-card" data-schedule-date="2026-09-08">
           <a href="article1.html" class="thumb" style="background: linear-gradient(135deg, #1B6B4A 0%, #2ECC71 100%);" aria-label="Read Best Massage Guns in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F486;
           </a>
@@ -861,52 +846,7 @@
   <p class="disclaimer">Disclaimer: Content on this site is for informational purposes only. We do not guarantee the accuracy of product information; always verify details before buying. All recommendations are made independently.</p>
 
   <script>
-    (function () {
-      var INITIAL = 10;
-      var grid = document.querySelector('.reviews .blog-grid');
-      var btn = document.getElementById('showMoreReviews');
-      if (!grid || !btn) return;
-      var allCards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
 
-      // Determine which cards are actually visible (not hidden by scheduling)
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var visibleCards = [];
-      var hiddenBySchedule = [];
-      allCards.forEach(function (c) {
-        if (c.classList.contains('blog-card-scheduled')) {
-          var dateStr = c.getAttribute('data-schedule-date');
-          if (dateStr) {
-            var pubDate = new Date(dateStr + 'T00:00:00');
-            if (today >= pubDate) {
-              visibleCards.push(c);
-            } else {
-              hiddenBySchedule.push(c);
-            }
-          } else {
-            visibleCards.push(c);
-          }
-        } else {
-          visibleCards.push(c);
-        }
-      });
-
-      var wrap = btn.closest('.more-wrap');
-      if (visibleCards.length <= INITIAL) {
-        if (wrap) wrap.style.display = 'none';
-        return;
-      }
-
-      // Hide visible cards beyond INITIAL (only among visible ones)
-      visibleCards.forEach(function (c, i) {
-        if (i >= INITIAL) c.classList.add('card-hidden');
-      });
-
-      btn.addEventListener('click', function () {
-        visibleCards.forEach(function (c) { c.classList.remove('card-hidden'); });
-        if (wrap) wrap.style.display = 'none';
-      });
-    })();
 
     // Card click navigation (backup)
     document.querySelectorAll('.blog-card').forEach(function(card) {
@@ -919,19 +859,7 @@
       }
     });
 
-    // Scheduled article reveal
-    (function () {
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var scheduled = document.querySelectorAll('.blog-card-scheduled[data-schedule-date]');
-      scheduled.forEach(function (card) {
-        var dateStr = card.getAttribute('data-schedule-date');
-        var pubDate = new Date(dateStr + 'T00:00:00');
-        if (today >= pubDate) {
-          card.classList.add('is-visible');
-        }
-      });
-    })();
+
   </script>
 
 </body>
@@ -1232,10 +1160,7 @@
       margin-left: auto;
     }
 
-    .blog-card.card-hidden { display: none !important; }
-    .blog-card.blog-card-scheduled { display: none !important; }
-    .blog-card.blog-card-scheduled.is-visible { display: flex !important; }
-
+            
     @media (max-width: 720px) {
       .blog-grid {
         grid-template-columns: 1fr;
@@ -1264,16 +1189,6 @@
     }
     .step h3 { font-size: 16px; margin-bottom: 6px; }
     .step p { font-size: 13.5px; color: var(--text-light); }
-
-    /* ---------- Reviews: load more ---------- */
-    .more-wrap { text-align: center; margin-top: 30px; }
-    .btn-more {
-      display: inline-block; background: var(--white); color: var(--primary);
-      border: 1.5px solid var(--primary); padding: 12px 30px; border-radius: 8px;
-      font-size: 14.5px; font-weight: 600; cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-more:hover { background: var(--primary); color: #fff; }
 
     /* ---------- CTA ---------- */
     .cta { text-align: center; padding: 64px 20px; max-width: 640px; margin: 0 auto; }
@@ -1320,8 +1235,6 @@
     /* ---------- Print ---------- */
     @media print {
       .topnav, .hero-actions, .cta, .blog-card .read-link { display: none !important; }
-      .blog-card.card-hidden { display: flex !important; }
-      .more-wrap { display: none !important; }
       body { background: #fff; }
       .reviews { background: #fff; padding: 20px 0; }
       .blog-card, .cat-card { break-inside: avoid; box-shadow: none; }
@@ -1435,7 +1348,7 @@
       </div>
 
       <div class="blog-grid">
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
+        <article class="blog-card" data-schedule-date="2026-09-30">
           <a href="article18.html" class="thumb" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" aria-label="Read Best Back Stretchers in 2026: Expert Reviews & Buying Guide">
             &#x1F9D8;
           </a>
@@ -1449,7 +1362,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-02">
+        <article class="blog-card" data-schedule-date="2026-10-02">
           <a href="article19.html" class="thumb" style="background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);" aria-label="Read Best TENS &amp; EMS Muscle Stimulators in 2026: Expert Reviews &amp; Buying Guide">
             &#x26A1;
           </a>
@@ -1463,7 +1376,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-04">
+        <article class="blog-card" data-schedule-date="2026-10-04">
           <a href="article20.html" class="thumb" style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);" aria-label="Read Best Sleep Aid Devices in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F634;
           </a>
@@ -1477,7 +1390,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-07">
+        <article class="blog-card" data-schedule-date="2026-10-07">
           <a href="article21.html" class="thumb" style="background: linear-gradient(135deg, #D97706 0%, #B45309 100%);" aria-label="Read Best Foot Acupressure Mats in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F9B6;
           </a>
@@ -1491,7 +1404,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-10">
+        <article class="blog-card" data-schedule-date="2026-10-10">
           <a href="article22.html" class="thumb" style="background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);" aria-label="Read Best Portable Juicers in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F964;
           </a>
@@ -1505,7 +1418,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-10-13">
+        <article class="blog-card" data-schedule-date="2026-10-13">
           <a href="article23.html" class="thumb" style="background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);" aria-label="Read Best Air Quality Detectors in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F32C;
           </a>
@@ -1521,7 +1434,7 @@
         </article>
 
 
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-29">
+        <article class="blog-card" data-schedule-date="2026-09-29">
           <a href="article16.html" class="thumb" style="background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);" aria-label="Read Best Oral Irrigators in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F4A7;
           </a>
@@ -1535,7 +1448,7 @@
             </div>
           </div>
         </article>
-        <article class="blog-card blog-card-scheduled" data-schedule-date="2026-09-30">
+        <article class="blog-card" data-schedule-date="2026-09-30">
           <a href="article17.html" class="thumb" style="background: linear-gradient(135deg, #991B1B 0%, #DC2626 100%);" aria-label="Read Best Infrared Therapy Mattresses in 2026: Expert Reviews &amp; Buying Guide">
             &#x1F534;
           </a>
@@ -1747,9 +1660,7 @@
         </article>
       </div>
 
-      <div class="more-wrap">
-        <button type="button" class="btn-more" id="showMoreReviews">See more reviews</button>
-      </div>
+
     </div>
   </section>
 
@@ -1807,52 +1718,7 @@
   <p class="disclaimer">Disclaimer: Content on this site is for informational purposes only. We do not guarantee the accuracy of product information; always verify details before buying. All recommendations are made independently.</p>
 
   <script>
-    (function () {
-      var INITIAL = 10;
-      var grid = document.querySelector('.reviews .blog-grid');
-      var btn = document.getElementById('showMoreReviews');
-      if (!grid || !btn) return;
-      var allCards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
 
-      // Determine which cards are actually visible (not hidden by scheduling)
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var visibleCards = [];
-      var hiddenBySchedule = [];
-      allCards.forEach(function (c) {
-        if (c.classList.contains('blog-card-scheduled')) {
-          var dateStr = c.getAttribute('data-schedule-date');
-          if (dateStr) {
-            var pubDate = new Date(dateStr + 'T00:00:00');
-            if (today >= pubDate) {
-              visibleCards.push(c);
-            } else {
-              hiddenBySchedule.push(c);
-            }
-          } else {
-            visibleCards.push(c);
-          }
-        } else {
-          visibleCards.push(c);
-        }
-      });
-
-      var wrap = btn.closest('.more-wrap');
-      if (visibleCards.length <= INITIAL) {
-        if (wrap) wrap.style.display = 'none';
-        return;
-      }
-
-      // Hide visible cards beyond INITIAL (only among visible ones)
-      visibleCards.forEach(function (c, i) {
-        if (i >= INITIAL) c.classList.add('card-hidden');
-      });
-
-      btn.addEventListener('click', function () {
-        visibleCards.forEach(function (c) { c.classList.remove('card-hidden'); });
-        if (wrap) wrap.style.display = 'none';
-      });
-    })();
 
     // Card click navigation (backup)
     document.querySelectorAll('.blog-card').forEach(function(card) {
@@ -1865,19 +1731,7 @@
       }
     });
 
-    // Scheduled article reveal
-    (function () {
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var scheduled = document.querySelectorAll('.blog-card-scheduled[data-schedule-date]');
-      scheduled.forEach(function (card) {
-        var dateStr = card.getAttribute('data-schedule-date');
-        var pubDate = new Date(dateStr + 'T00:00:00');
-        if (today >= pubDate) {
-          card.classList.add('is-visible');
-        }
-      });
-    })();
+
   </script>
 
 </body>
