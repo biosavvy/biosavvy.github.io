@@ -71,38 +71,80 @@ def fetch_article(url):
 
 
 # ── Dev.to ──
-def post_to_devto(article):
-    """Post article summary to Dev.to."""
+def get_devto_existing():
+    """Get list of articles already posted on Dev.to to avoid duplicates."""
+    if not DEVTO_API_KEY:
+        return set()
+    try:
+        r = requests.get(
+            "https://dev.to/api/articles/me/all",
+            headers={"api-key": DEVTO_API_KEY},
+            params={"per_page": 100},
+            timeout=30
+        )
+        if r.status_code == 200:
+            articles = r.json()
+            # Build a set of normalized titles for matching
+            existing = set()
+            for a in articles:
+                # Store both the article ID and normalized title
+                title = a["title"].lower().replace("&amp;", "&").replace("&#39;", "'").strip()
+                existing.add(title)
+            return existing
+        else:
+            print(f"  ⚠ Could not fetch Dev.to articles: {r.status_code}")
+            return set()
+    except Exception as e:
+        print(f"  ⚠ Dev.to dedup check failed: {e}")
+        return set()
+
+
+def post_to_devto(article, posted_titles):
+    """Post article summary to Dev.to with a health-focused, caring tone."""
     if not DEVTO_API_KEY:
         return False
 
-    title = article["title"].replace(" in 2026: Expert Reviews & Buying Guide", "")
-    title = title.replace(" in 2026: Tested & Ranked", "")
+    # Clean title for Dev.to post
+    title = article["title"]
+    for suffix in [" in 2026: Expert Reviews & Buying Guide",
+                    " in 2026: Expert Reviews &amp; Buying Guide",
+                    " in 2026: Tested & Ranked",
+                    " in 2026: Tested &amp; Ranked"]:
+        title = title.replace(suffix, "")
+
+    # Skip if already posted (check by title)
+    if title.lower() in posted_titles:
+        print(f"  ⏭ Dev.to: Already posted — {title[:50]}")
+        return "skipped"
+
+    desc = article["description"].replace('&#x27;', "'").replace('&amp;', '&')
 
     body = f"""---
 title: {title}
 published: true
-tags: [health, productreview, buyerguide, wellness]
+tags: [health, wellness, buyerguide, evidencebased]
 cover_image: {article['image']}
 ---
 
-I built [BioSavvy]({SITE_URL}), a site that reviews health products using evidence and measurable criteria — not marketing hype.
+选择健康产品时，最让人头疼的问题往往是：**到底哪个真的有用？**
 
-## {article['title']}
+市面上产品五花八门，宣传天花乱坠，但真正经得起推敲的有多少？我们做这些评测，就是希望帮大家少走弯路，找到真正对自己健康有帮助的东西。
 
-{article['description']}
+## {title}
 
-**[Read the full review →]({article['url']})**
+{desc}
 
-We evaluate products on:
-- 📊 Measurable performance metrics
-- 🔬 Scientific evidence behind claims
-- 💰 Value for money
-- 🛡️ Build quality and safety
+**[查看完整评测 →]({article['url']})**
 
-Check out the full buyer's guide at [BioSavvy]({SITE_URL}) for detailed specs, pros/cons, and our top picks.
+我们的评测关注这些方面：
+- 🌿 成分与原理 — 这个产品靠不靠谱？有科学依据吗？
+- 📊 实际表现 — 用起来效果怎么样？
+- 💰 性价比 — 花的钱值不值？
+- 🛡️ 安全性 — 用着放心吗？
 
-*All reviews are independent — no sponsored content, no affiliate bias.*
+每一篇评测我们都认真对待，希望大家能从中找到适合自己的健康好物。
+
+*所有评测均为独立撰写，不接受商业赞助。*
 """
 
     try:
@@ -110,10 +152,10 @@ Check out the full buyer's guide at [BioSavvy]({SITE_URL}) for detailed specs, p
             "https://dev.to/api/articles",
             headers={"api-key": DEVTO_API_KEY, "Content-Type": "application/json"},
             json={"article": {
-                "title": f"📊 {title} — Evidence-Based Review",
+                "title": f"{title} — 健康评测推荐",
                 "body_markdown": body,
                 "published": True,
-                "tags": ["health", "productreview", "buyerguide", "wellness"]
+                "tags": ["health", "wellness", "buyerguide", "evidencebased"]
             }},
             timeout=30
         )
@@ -205,22 +247,53 @@ def main():
         print("  ✗ No articles found")
         return
 
-    # Get the most recent article (last in sitemap)
-    latest_url = articles[-1]
-    article = fetch_article(latest_url)
-    if not article:
-        print(f"  ✗ Could not fetch {latest_url}")
+    # Fetch all articles
+    all_articles = []
+    for url in articles:
+        a = fetch_article(url)
+        if a:
+            all_articles.append(a)
+
+    if not all_articles:
+        print("  ✗ Could not fetch any articles")
         return
 
-    print(f"\n  📝 Latest article: {article['title'][:60]}")
-    print(f"  🔗 {article['url']}\n")
+    # Reverse so oldest first (matches Dev.to chronological display)
+    all_articles.reverse()
+
+    print(f"\n  📝 Found {len(all_articles)} articles")
 
     results = {}
 
-    # Dev.to
+    # Dev.to — post at most 1 article per run to avoid triggering spam detection
     if DEVTO_API_KEY:
-        print("[Dev.to] Posting...")
-        results["Dev.to"] = post_to_devto(article)
+        print("\n[Dev.to] Checking existing posts...")
+        posted_titles = get_devto_existing()
+        print(f"  Already posted: {len(posted_titles)} articles")
+
+        posted = 0
+        for article in all_articles:
+            result = post_to_devto(article, posted_titles)
+            if result is True:
+                posted += 1
+                break  # Only 1 article per run — safe for spam detection
+            elif result == "skipped":
+                continue  # Already posted, try next
+            else:
+                break  # Failed, stop
+
+        if posted == 0:
+            # Check if all are already posted
+            all_posted = all(
+                post_to_devto(a, posted_titles) == "skipped"
+                for a in all_articles[:3]  # Quick check, don't loop all
+            )
+            if all_posted:
+                results["Dev.to"] = "all articles already posted"
+            else:
+                results["Dev.to"] = "no new articles to post this run"
+        else:
+            results["Dev.to"] = f"{posted} posted (safe mode: 1 per run)"
     else:
         print("[Dev.to] Skipped — no DEVTO_API_KEY secret")
 
@@ -237,9 +310,12 @@ def main():
     print(f"\n{'='*60}")
     print("PUBLISHING SUMMARY")
     print(f"{'='*60}")
-    for platform, success in results.items():
-        status = "✓" if success else "✗"
-        print(f"  {status} {platform}")
+    for platform, result in results.items():
+        if isinstance(result, str):
+            print(f"  ✓ {platform}: {result}")
+        else:
+            status = "✓" if result else "✗"
+            print(f"  {status} {platform}")
     if not results:
         print("  ℹ No platforms configured — set secrets to enable")
     print(f"{'='*60}")
