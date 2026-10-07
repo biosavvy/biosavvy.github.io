@@ -1,0 +1,36 @@
+name: Auto Publisher (Dev.to + Reddit)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'article*.html'
+      - 'index.html'
+  schedule:
+    # Post every Tuesday and Friday at 10:00 AM EST
+    - cron: '3 14 * * 2,5'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Publish to platforms
+      env:
+        DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+        REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+      run: python .github/scripts/promo-publisher.py

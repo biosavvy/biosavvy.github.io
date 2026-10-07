@@ -71,7 +71,7 @@ def submit_indexnow():
 
     # Additional pages
     urls.extend([
-        f"{SITE_URL}/blog.html",
+        f"{SITE_URL}/feed.xml",
     ])
 
     payload = {
