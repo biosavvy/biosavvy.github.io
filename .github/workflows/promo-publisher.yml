@@ -7,9 +7,9 @@ on:
       - 'article*.html'
       - 'index.html'
   schedule:
-    # Post 1 article per run, 3x/week (Mon/Wed/Fri 10 AM EST)
+    # Post 1 article per run, 2x/week (Tue/Fri 10 AM EST)
     # Safe pace to avoid triggering spam detection on any platform
-    - cron: '3 14 * * 1,3,5'
+    - cron: '3 14 * * 2,5'
   workflow_dispatch:
 
 jobs:
